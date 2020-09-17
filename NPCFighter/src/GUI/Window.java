@@ -38,6 +38,8 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import java.awt.Window.Type;
 import javax.swing.JList;
+
+import Factory.AttackType;
 import net.miginfocom.swing.MigLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -45,11 +47,12 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.security.acl.Group;
 
 public class Window {
 	private Main _main;
 	private JFrame frmSettings;
-	private JTextField AreaSizeField;
+	private JSpinner AreaSizeField;
 	private ButtonGroup GroupRadioButton = new ButtonGroup();
 	private JTextField AddItemTextField;
 	public Window(Main main) {
@@ -64,51 +67,21 @@ public class Window {
 	private void initialize() {
 		frmSettings = new JFrame();
 		frmSettings.setTitle("Settings");
-		frmSettings.setBounds(100, 100, 453, 583);
+		frmSettings.setBounds(100, 100, 453, 629);
 		frmSettings.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		SpringLayout springLayout = new SpringLayout();
 		frmSettings.getContentPane().setLayout(springLayout);
-		
+
+		JCheckBox AttackCheckBox = new JCheckBox("Attack");
+		JCheckBox StrengthCheckBox = new JCheckBox("Strength");
+		JCheckBox DefendCheckBox = new JCheckBox("Defend");
+
 		JButton StartBtn = new JButton("Start");
 		springLayout.putConstraint(SpringLayout.NORTH, StartBtn, -32, SpringLayout.SOUTH, frmSettings.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, StartBtn, 0, SpringLayout.WEST, frmSettings.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, StartBtn, 0, SpringLayout.SOUTH, frmSettings.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, StartBtn, -294, SpringLayout.EAST, frmSettings.getContentPane());
 		frmSettings.getContentPane().add(StartBtn);
-		
-		JTabbedPane AttackPane = new JTabbedPane(JTabbedPane.TOP);
-		springLayout.putConstraint(SpringLayout.NORTH, AttackPane, -92, SpringLayout.NORTH, StartBtn);
-		springLayout.putConstraint(SpringLayout.WEST, AttackPane, 10, SpringLayout.WEST, frmSettings.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, AttackPane, -9, SpringLayout.NORTH, StartBtn);
-		springLayout.putConstraint(SpringLayout.EAST, AttackPane, 427, SpringLayout.WEST, frmSettings.getContentPane());
-		frmSettings.getContentPane().add(AttackPane);
-		
-		JPanel MeleePanel = new JPanel();
-		AttackPane.addTab("Melee", null, MeleePanel, null);
-		MeleePanel.setLayout(new BoxLayout(MeleePanel, BoxLayout.X_AXIS));
-		
-		JCheckBox MeleeAttackCheckBox = new JCheckBox("Attack");
-		MeleePanel.add(MeleeAttackCheckBox);
-		
-		JCheckBox MeleeStrengthCheckBox = new JCheckBox("Strength");
-		MeleePanel.add(MeleeStrengthCheckBox);
-		
-		JCheckBox MeleeDefendCheckBox = new JCheckBox("Defend");
-		MeleePanel.add(MeleeDefendCheckBox);
-		
-		JPanel RangePanel = new JPanel();
-		AttackPane.addTab("Range", null, RangePanel, null);
-		RangePanel.setLayout(new BoxLayout(RangePanel, BoxLayout.X_AXIS));
-		
-		JCheckBox RangeDefendCheckBox = new JCheckBox("Defend");
-		RangePanel.add(RangeDefendCheckBox);
-		
-		JPanel MagicPanel = new JPanel();
-		AttackPane.addTab("Magic", null, MagicPanel, null);
-		MagicPanel.setLayout(new BoxLayout(MagicPanel, BoxLayout.X_AXIS));
-		
-		JCheckBox MagicDefendCheckBox = new JCheckBox("Defend");
-		MagicPanel.add(MagicDefendCheckBox);
 		
 		List ScannedList = new List();
 		ScannedList.setMultipleSelections(true);
@@ -156,33 +129,31 @@ public class Window {
 		frmSettings.getContentPane().add(SpecialAttackCheckBox);
 		
 		JSpinner PickupItemCostSpinner = new JSpinner();
-		springLayout.putConstraint(SpringLayout.NORTH, PickupItemCostSpinner, 227, SpringLayout.NORTH, frmSettings.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, PickupItemCostSpinner, -293, SpringLayout.SOUTH, frmSettings.getContentPane());
+		springLayout.putConstraint(SpringLayout.NORTH, PickupItemCostSpinner, 18, SpringLayout.SOUTH, SearchNPCButton);
+		springLayout.putConstraint(SpringLayout.WEST, PickupItemCostSpinner, 17, SpringLayout.WEST, ScannedList);
 		frmSettings.getContentPane().add(PickupItemCostSpinner);
 		
 		JLabel PickUpItemLabel = new JLabel("Pick up item");
-		springLayout.putConstraint(SpringLayout.WEST, PickupItemCostSpinner, 15, SpringLayout.EAST, PickUpItemLabel);
-		springLayout.putConstraint(SpringLayout.NORTH, PickUpItemLabel, 5, SpringLayout.NORTH, PickupItemCostSpinner);
-		springLayout.putConstraint(SpringLayout.EAST, PickUpItemLabel, 0, SpringLayout.EAST, AddNpcButton);
+		springLayout.putConstraint(SpringLayout.NORTH, PickUpItemLabel, 3, SpringLayout.NORTH, PickupItemCostSpinner);
+		springLayout.putConstraint(SpringLayout.EAST, PickUpItemLabel, -6, SpringLayout.WEST, PickupItemCostSpinner);
 		frmSettings.getContentPane().add(PickUpItemLabel);
 		
 		JLabel GPLabel = new JLabel("Gp");
+		springLayout.putConstraint(SpringLayout.EAST, PickupItemCostSpinner, -6, SpringLayout.WEST, GPLabel);
 		springLayout.putConstraint(SpringLayout.NORTH, GPLabel, 232, SpringLayout.NORTH, frmSettings.getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, PickupItemCostSpinner, -14, SpringLayout.WEST, GPLabel);
 		springLayout.putConstraint(SpringLayout.EAST, GPLabel, -5, SpringLayout.EAST, frmSettings.getContentPane());
 		frmSettings.getContentPane().add(GPLabel);
 		
-		AreaSizeField = new JTextField();
-		springLayout.putConstraint(SpringLayout.NORTH, AreaSizeField, 40, SpringLayout.SOUTH, SpecialAttackCheckBox);
-		springLayout.putConstraint(SpringLayout.EAST, AreaSizeField, -26, SpringLayout.WEST, SelectedList);
-		AreaSizeField.setText("8");
+		AreaSizeField = new JSpinner();
+		springLayout.putConstraint(SpringLayout.NORTH, AreaSizeField, 18, SpringLayout.SOUTH, PickupItemCostSpinner);
+		springLayout.putConstraint(SpringLayout.WEST, AreaSizeField, 355, SpringLayout.WEST, frmSettings.getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, AreaSizeField, 0, SpringLayout.EAST, PickupItemCostSpinner);
+		AreaSizeField.setValue("8");
 		frmSettings.getContentPane().add(AreaSizeField);
-		AreaSizeField.setColumns(10);
 		
 		JLabel AreaSizeLabel = new JLabel("Area size");
-		springLayout.putConstraint(SpringLayout.WEST, AreaSizeField, 6, SpringLayout.EAST, AreaSizeLabel);
-		springLayout.putConstraint(SpringLayout.WEST, AreaSizeLabel, 0, SpringLayout.WEST, BuryBonesCheckBox);
-		springLayout.putConstraint(SpringLayout.SOUTH, AreaSizeLabel, 0, SpringLayout.SOUTH, RemoveNpcButton);
+		springLayout.putConstraint(SpringLayout.NORTH, AreaSizeLabel, 3, SpringLayout.NORTH, AreaSizeField);
+		springLayout.putConstraint(SpringLayout.EAST, AreaSizeLabel, -6, SpringLayout.WEST, AreaSizeField);
 		frmSettings.getContentPane().add(AreaSizeLabel);
 		
 		JLabel SelectedListLabel = new JLabel("Selected List");
@@ -192,78 +163,65 @@ public class Window {
 		
 		JLabel ScannedListLabel = new JLabel("Scanned List");
 		springLayout.putConstraint(SpringLayout.NORTH, ScannedListLabel, 0, SpringLayout.NORTH, SelectedListLabel);
-		springLayout.putConstraint(SpringLayout.EAST, ScannedListLabel, 0, SpringLayout.EAST, PickupItemCostSpinner);
+		springLayout.putConstraint(SpringLayout.EAST, ScannedListLabel, -32, SpringLayout.EAST, frmSettings.getContentPane());
 		frmSettings.getContentPane().add(ScannedListLabel);
-		
+
 		JRadioButton MagicRadioButton = new JRadioButton("Magic");
-		springLayout.putConstraint(SpringLayout.SOUTH, AreaSizeField, -34, SpringLayout.NORTH, MagicRadioButton);
-		MagicRadioButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				GroupRadioButton.clearSelection();
-			}
-		});
 		springLayout.putConstraint(SpringLayout.WEST, MagicRadioButton, 0, SpringLayout.WEST, BuryBonesCheckBox);
 		springLayout.putConstraint(SpringLayout.SOUTH, MagicRadioButton, 0, SpringLayout.SOUTH, ScannedList);
 		frmSettings.getContentPane().add(MagicRadioButton);
 		GroupRadioButton.add(MagicRadioButton);
-		
+		MagicRadioButton.setActionCommand(AttackType.Magic.toString());
+
 		JRadioButton RandgeRadioButton = new JRadioButton("Range");
-		RandgeRadioButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				GroupRadioButton.clearSelection();
-			}
-		});
 		springLayout.putConstraint(SpringLayout.WEST, RandgeRadioButton, 0, SpringLayout.WEST, BuryBonesCheckBox);
 		springLayout.putConstraint(SpringLayout.SOUTH, RandgeRadioButton, 0, SpringLayout.SOUTH, SearchNPCButton);
 		frmSettings.getContentPane().add(RandgeRadioButton);
 		GroupRadioButton.add(RandgeRadioButton);
-		
+		RandgeRadioButton.setActionCommand(AttackType.Range.toString());
+
 		JRadioButton MeleeRadioButton = new JRadioButton("Melee");
-		MeleeRadioButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				GroupRadioButton.clearSelection();
-			}
-		});
 		MeleeRadioButton.setSelected(true);
 		springLayout.putConstraint(SpringLayout.NORTH, MeleeRadioButton, 6, SpringLayout.SOUTH, RandgeRadioButton);
 		springLayout.putConstraint(SpringLayout.WEST, MeleeRadioButton, 0, SpringLayout.WEST, BuryBonesCheckBox);
 		frmSettings.getContentPane().add(MeleeRadioButton);
 		GroupRadioButton.add(MeleeRadioButton);
+		MeleeRadioButton.setActionCommand(AttackType.Melee.toString());
 		
 		AddItemTextField = new JTextField();
-		springLayout.putConstraint(SpringLayout.WEST, AddItemTextField, 298, SpringLayout.WEST, frmSettings.getContentPane());
 		frmSettings.getContentPane().add(AddItemTextField);
 		AddItemTextField.setColumns(10);
 		
 		JLabel AddItemLabel = new JLabel("Item name:");
-		springLayout.putConstraint(SpringLayout.SOUTH, AddItemLabel, -73, SpringLayout.NORTH, AttackPane);
-		springLayout.putConstraint(SpringLayout.EAST, AddItemLabel, -6, SpringLayout.WEST, AddItemTextField);
+		springLayout.putConstraint(SpringLayout.NORTH, AddItemTextField, -3, SpringLayout.NORTH, AddItemLabel);
+		springLayout.putConstraint(SpringLayout.WEST, AddItemTextField, 6, SpringLayout.EAST, AddItemLabel);
+		springLayout.putConstraint(SpringLayout.SOUTH, AddItemLabel, -197, SpringLayout.SOUTH, frmSettings.getContentPane());
 		frmSettings.getContentPane().add(AddItemLabel);
 		
 		JButton AddItemButton = new JButton("Add");
-		springLayout.putConstraint(SpringLayout.NORTH, AddItemButton, 367, SpringLayout.NORTH, frmSettings.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, AddItemTextField, -17, SpringLayout.NORTH, AddItemButton);
-		springLayout.putConstraint(SpringLayout.WEST, AddItemButton, -89, SpringLayout.EAST, AddItemTextField);
-		springLayout.putConstraint(SpringLayout.EAST, AddItemButton, 0, SpringLayout.EAST, AddItemTextField);
+		springLayout.putConstraint(SpringLayout.EAST, AddItemButton, -53, SpringLayout.EAST, frmSettings.getContentPane());
 		frmSettings.getContentPane().add(AddItemButton);
 		
 		List AddedItemsList = new List();
-		springLayout.putConstraint(SpringLayout.SOUTH, AddedItemsList, -11, SpringLayout.NORTH, AttackPane);
+		springLayout.putConstraint(SpringLayout.WEST, AddItemButton, 85, SpringLayout.EAST, AddedItemsList);
+		springLayout.putConstraint(SpringLayout.WEST, AddItemLabel, 27, SpringLayout.EAST, AddedItemsList);
+		springLayout.putConstraint(SpringLayout.SOUTH, AddedItemsList, -103, SpringLayout.NORTH, StartBtn);
 		AddedItemsList.setMultipleSelections(true);
 		springLayout.putConstraint(SpringLayout.WEST, AddedItemsList, 10, SpringLayout.WEST, frmSettings.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, AddedItemsList, 210, SpringLayout.WEST, frmSettings.getContentPane());
 		frmSettings.getContentPane().add(AddedItemsList);
 		
 		JButton RemoveItemButton = new JButton("Remove");
-		springLayout.putConstraint(SpringLayout.WEST, RemoveItemButton, 0, SpringLayout.WEST, AddItemButton);
-		springLayout.putConstraint(SpringLayout.SOUTH, RemoveItemButton, -1, SpringLayout.NORTH, AttackPane);
-		springLayout.putConstraint(SpringLayout.EAST, RemoveItemButton, 0, SpringLayout.EAST, AddItemTextField);
+		springLayout.putConstraint(SpringLayout.WEST, RemoveItemButton, 85, SpringLayout.EAST, AddedItemsList);
+		springLayout.putConstraint(SpringLayout.EAST, RemoveItemButton, -53, SpringLayout.EAST, frmSettings.getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, AddItemButton, -6, SpringLayout.NORTH, RemoveItemButton);
+		springLayout.putConstraint(SpringLayout.SOUTH, RemoveItemButton, 0, SpringLayout.SOUTH, AddedItemsList);
 		frmSettings.getContentPane().add(RemoveItemButton);
 		
 		JLabel PickUpItemsLabel = new JLabel("Pick up Items:");
-		springLayout.putConstraint(SpringLayout.SOUTH, PickUpItemsLabel, -226, SpringLayout.SOUTH, frmSettings.getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, PickUpItemsLabel, 10, SpringLayout.WEST, frmSettings.getContentPane());
 		springLayout.putConstraint(SpringLayout.NORTH, AddedItemsList, 6, SpringLayout.SOUTH, PickUpItemsLabel);
-		springLayout.putConstraint(SpringLayout.WEST, PickUpItemsLabel, 0, SpringLayout.WEST, AttackPane);
+		springLayout.putConstraint(SpringLayout.SOUTH, PickUpItemsLabel, -226, SpringLayout.SOUTH, frmSettings.getContentPane());
 		frmSettings.getContentPane().add(PickUpItemsLabel);
 		
 		JLabel percentageValueLabel = new JLabel("");
@@ -273,27 +231,45 @@ public class Window {
 		
 		JCheckBox ChatBotCheckBox = new JCheckBox("ChatBot");
 		springLayout.putConstraint(SpringLayout.NORTH, ChatBotCheckBox, 6, SpringLayout.SOUTH, SpecialAttackCheckBox);
-		springLayout.putConstraint(SpringLayout.WEST, ChatBotCheckBox, 0, SpringLayout.WEST, AttackPane);
+		springLayout.putConstraint(SpringLayout.WEST, ChatBotCheckBox, 10, SpringLayout.WEST, frmSettings.getContentPane());
 		ChatBotCheckBox.setSelected(true);
 		frmSettings.getContentPane().add(ChatBotCheckBox);
 		
 		JCheckBox WorldHopperCheckBox = new JCheckBox("WorldHopper");
+		springLayout.putConstraint(SpringLayout.NORTH, WorldHopperCheckBox, 5, SpringLayout.NORTH, RemoveNpcButton);
+		springLayout.putConstraint(SpringLayout.WEST, WorldHopperCheckBox, 0, SpringLayout.WEST, BuryBonesCheckBox);
 		WorldHopperCheckBox.setSelected(true);
-		springLayout.putConstraint(SpringLayout.NORTH, WorldHopperCheckBox, 0, SpringLayout.NORTH, percentageValueLabel);
-		springLayout.putConstraint(SpringLayout.WEST, WorldHopperCheckBox, 0, SpringLayout.WEST, AttackPane);
 		frmSettings.getContentPane().add(WorldHopperCheckBox);
 		
 		JButton SaveSettingsButton = new JButton("Save Settings");
-		springLayout.putConstraint(SpringLayout.NORTH, SaveSettingsButton, 6, SpringLayout.SOUTH, AttackPane);
-		springLayout.putConstraint(SpringLayout.WEST, SaveSettingsButton, 10, SpringLayout.WEST, AddItemButton);
+		springLayout.putConstraint(SpringLayout.NORTH, SaveSettingsButton, 0, SpringLayout.NORTH, StartBtn);
+		springLayout.putConstraint(SpringLayout.WEST, SaveSettingsButton, 162, SpringLayout.EAST, StartBtn);
 		springLayout.putConstraint(SpringLayout.SOUTH, SaveSettingsButton, 0, SpringLayout.SOUTH, frmSettings.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, SaveSettingsButton, 0, SpringLayout.EAST, frmSettings.getContentPane());
 		frmSettings.getContentPane().add(SaveSettingsButton);
 		
 		JCheckBox PickUpArrowCheckBox = new JCheckBox("Pick Up Arrow");
-		RangePanel.add(PickUpArrowCheckBox);
-		springLayout.putConstraint(SpringLayout.NORTH, PickUpArrowCheckBox, 6, SpringLayout.SOUTH, SpecialAttackCheckBox);
-		springLayout.putConstraint(SpringLayout.WEST, PickUpArrowCheckBox, 0, SpringLayout.WEST, BuryBonesCheckBox);
+		springLayout.putConstraint(SpringLayout.NORTH, PickUpArrowCheckBox, 6, SpringLayout.SOUTH, WorldHopperCheckBox);
+		springLayout.putConstraint(SpringLayout.EAST, PickUpArrowCheckBox, 0, SpringLayout.EAST, SpecialAttackCheckBox);
+		frmSettings.getContentPane().add(PickUpArrowCheckBox);
+		
+
+		springLayout.putConstraint(SpringLayout.NORTH, AttackCheckBox, 19, SpringLayout.SOUTH, MeleeRadioButton);
+		springLayout.putConstraint(SpringLayout.WEST, AttackCheckBox, 0, SpringLayout.WEST, BuryBonesCheckBox);
+		frmSettings.getContentPane().add(AttackCheckBox);
+
+
+
+		springLayout.putConstraint(SpringLayout.NORTH, StrengthCheckBox, 6, SpringLayout.SOUTH, AttackCheckBox);
+		springLayout.putConstraint(SpringLayout.WEST, StrengthCheckBox, 0, SpringLayout.WEST, BuryBonesCheckBox);
+		frmSettings.getContentPane().add(StrengthCheckBox);
+
+
+		springLayout.putConstraint(SpringLayout.NORTH, DefendCheckBox, 6, SpringLayout.SOUTH, StrengthCheckBox);
+		springLayout.putConstraint(SpringLayout.WEST, DefendCheckBox, 0, SpringLayout.WEST, BuryBonesCheckBox);
+		frmSettings.getContentPane().add(DefendCheckBox);
+
+
 		/*Action*/
 		AddNpcButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -327,6 +303,46 @@ public class Window {
 				for(int i = 0; i < AddedItemsList.getSelectedItems().length; i++) {
 					AddedItemsList.remove(AddedItemsList.getSelectedItems()[i]);	
 				}
+			}
+		});
+		StartBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				_main.get_CombatVariables().get_WindowVariables().SetAll(
+						BuryBonesCheckBox.isSelected(),
+						SpecialAttackCheckBox.isSelected(),
+						ChatBotCheckBox.isSelected(),
+						WorldHopperCheckBox.isSelected(),
+						PickUpArrowCheckBox.isSelected(),
+						StrengthCheckBox.isSelected(),
+						AttackCheckBox.isSelected(),
+						DefendCheckBox.isSelected(),
+						AttackType.valueOf(GroupRadioButton.getSelection().getActionCommand()),
+						(int)AreaSizeField.getValue(),
+						(int)PickupItemCostSpinner.getValue(),
+						SelectedList.getItems(),
+						AddedItemsList.getItems());
+			}
+		});
+		MagicRadioButton.addMouseListener(new MouseAdapter() {
+			public void actionPerformed(MouseEvent arg0) {
+				//GroupRadioButton.clearSelection();
+				AttackCheckBox.setEnabled(false);
+				StrengthCheckBox.setEnabled(false);
+			}
+		});
+		RandgeRadioButton.addMouseListener(new MouseAdapter() {
+			public void actionPerformed(MouseEvent e) {
+				//GroupRadioButton.clearSelection();
+				AttackCheckBox.setEnabled(false);
+				StrengthCheckBox.setEnabled(false);
+			}
+		});
+		MeleeRadioButton.addMouseListener(new MouseAdapter() {
+			public void actionPerformed(MouseEvent e) {
+				//GroupRadioButton.clearSelection();
+				AttackCheckBox.setEnabled(true);
+				StrengthCheckBox.setEnabled(true);
 			}
 		});
 	}
