@@ -1,69 +1,30 @@
 package GUI;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-
 import Combat.Main;
-
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import java.awt.BorderLayout;
-import javax.swing.JSplitPane;
-import javax.swing.SpringLayout;
-import javax.swing.JTabbedPane;
-import javax.swing.JInternalFrame;
-import javax.swing.JTable;
-import java.awt.List;
-import java.awt.Color;
-import javax.swing.JCheckBox;
-import java.awt.Choice;
-import javax.swing.JSpinner;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JToolBar;
-import javax.swing.JPanel;
-import javax.swing.JLayeredPane;
-import javax.swing.JRadioButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.BoxLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JToggleButton;
-import javax.swing.JSeparator;
-import javax.swing.JSlider;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
-import java.awt.Window.Type;
-import javax.swing.JList;
-
 import Factory.AttackType;
-import net.miginfocom.swing.MigLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.security.acl.Group;
+
+/*import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;*/
+
 
 public class Window {
 	private Main _main;
 	private JFrame frmSettings;
-	private JSpinner AreaSizeField;
 	private ButtonGroup GroupRadioButton = new ButtonGroup();
 	private JTextField AddItemTextField;
+
 	public Window(Main main) {
 		this._main = main;
 		initialize();
 
 	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frmSettings = new JFrame();
 		frmSettings.setTitle("Settings");
@@ -84,14 +45,16 @@ public class Window {
 		frmSettings.getContentPane().add(StartBtn);
 		
 		List ScannedList = new List();
+		ScannedList.setForeground(new Color(255, 255, 255));
+		ScannedList.setBackground(new Color(0, 51, 51));
 		ScannedList.setMultipleSelections(true);
 		springLayout.putConstraint(SpringLayout.NORTH, ScannedList, 20, SpringLayout.NORTH, frmSettings.getContentPane());
 		frmSettings.getContentPane().add(ScannedList);
 		
 		List SelectedList = new List();
+		SelectedList.setForeground(new Color(255, 255, 255));
+		SelectedList.setBackground(new Color(0, 51, 51));
 		SelectedList.setMultipleSelections(true);
-		springLayout.putConstraint(SpringLayout.NORTH, SelectedList, 20, SpringLayout.NORTH, frmSettings.getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, SelectedList, 0, SpringLayout.SOUTH, ScannedList);
 		frmSettings.getContentPane().add(SelectedList);
 		
 		JButton AddNpcButton = new JButton("<-");
@@ -111,6 +74,7 @@ public class Window {
 		frmSettings.getContentPane().add(RemoveNpcButton);
 		
 		JButton SearchNPCButton = new JButton("Scan");
+		springLayout.putConstraint(SpringLayout.EAST, ScannedList, 0, SpringLayout.EAST, SearchNPCButton);
 		springLayout.putConstraint(SpringLayout.WEST, SearchNPCButton, 372, SpringLayout.WEST, frmSettings.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, ScannedList, -6, SpringLayout.NORTH, SearchNPCButton);
 		springLayout.putConstraint(SpringLayout.NORTH, SearchNPCButton, 188, SpringLayout.NORTH, frmSettings.getContentPane());
@@ -130,12 +94,12 @@ public class Window {
 		
 		JSpinner PickupItemCostSpinner = new JSpinner();
 		springLayout.putConstraint(SpringLayout.NORTH, PickupItemCostSpinner, 18, SpringLayout.SOUTH, SearchNPCButton);
-		springLayout.putConstraint(SpringLayout.WEST, PickupItemCostSpinner, 17, SpringLayout.WEST, ScannedList);
 		frmSettings.getContentPane().add(PickupItemCostSpinner);
 		
 		JLabel PickUpItemLabel = new JLabel("Pick up item");
+		springLayout.putConstraint(SpringLayout.EAST, PickUpItemLabel, -109, SpringLayout.EAST, frmSettings.getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, PickupItemCostSpinner, 6, SpringLayout.EAST, PickUpItemLabel);
 		springLayout.putConstraint(SpringLayout.NORTH, PickUpItemLabel, 3, SpringLayout.NORTH, PickupItemCostSpinner);
-		springLayout.putConstraint(SpringLayout.EAST, PickUpItemLabel, -6, SpringLayout.WEST, PickupItemCostSpinner);
 		frmSettings.getContentPane().add(PickUpItemLabel);
 		
 		JLabel GPLabel = new JLabel("Gp");
@@ -143,12 +107,11 @@ public class Window {
 		springLayout.putConstraint(SpringLayout.NORTH, GPLabel, 232, SpringLayout.NORTH, frmSettings.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, GPLabel, -5, SpringLayout.EAST, frmSettings.getContentPane());
 		frmSettings.getContentPane().add(GPLabel);
-		
-		AreaSizeField = new JSpinner();
+
+		JSpinner AreaSizeField = new JSpinner();
 		springLayout.putConstraint(SpringLayout.NORTH, AreaSizeField, 18, SpringLayout.SOUTH, PickupItemCostSpinner);
 		springLayout.putConstraint(SpringLayout.WEST, AreaSizeField, 355, SpringLayout.WEST, frmSettings.getContentPane());
 		springLayout.putConstraint(SpringLayout.EAST, AreaSizeField, 0, SpringLayout.EAST, PickupItemCostSpinner);
-		AreaSizeField.setValue("8");
 		frmSettings.getContentPane().add(AreaSizeField);
 		
 		JLabel AreaSizeLabel = new JLabel("Area size");
@@ -157,8 +120,9 @@ public class Window {
 		frmSettings.getContentPane().add(AreaSizeLabel);
 		
 		JLabel SelectedListLabel = new JLabel("Selected List");
+		springLayout.putConstraint(SpringLayout.SOUTH, SelectedListLabel, -576, SpringLayout.SOUTH, frmSettings.getContentPane());
+		springLayout.putConstraint(SpringLayout.NORTH, SelectedList, 6, SpringLayout.SOUTH, SelectedListLabel);
 		springLayout.putConstraint(SpringLayout.WEST, SelectedListLabel, 78, SpringLayout.EAST, BuryBonesCheckBox);
-		springLayout.putConstraint(SpringLayout.SOUTH, SelectedListLabel, -6, SpringLayout.NORTH, SelectedList);
 		frmSettings.getContentPane().add(SelectedListLabel);
 		
 		JLabel ScannedListLabel = new JLabel("Scanned List");
@@ -168,12 +132,12 @@ public class Window {
 
 		JRadioButton MagicRadioButton = new JRadioButton("Magic");
 		springLayout.putConstraint(SpringLayout.WEST, MagicRadioButton, 0, SpringLayout.WEST, BuryBonesCheckBox);
-		springLayout.putConstraint(SpringLayout.SOUTH, MagicRadioButton, 0, SpringLayout.SOUTH, ScannedList);
 		frmSettings.getContentPane().add(MagicRadioButton);
 		GroupRadioButton.add(MagicRadioButton);
 		MagicRadioButton.setActionCommand(AttackType.Magic.toString());
 
 		JRadioButton RandgeRadioButton = new JRadioButton("Range");
+		springLayout.putConstraint(SpringLayout.SOUTH, MagicRadioButton, -6, SpringLayout.NORTH, RandgeRadioButton);
 		springLayout.putConstraint(SpringLayout.WEST, RandgeRadioButton, 0, SpringLayout.WEST, BuryBonesCheckBox);
 		springLayout.putConstraint(SpringLayout.SOUTH, RandgeRadioButton, 0, SpringLayout.SOUTH, SearchNPCButton);
 		frmSettings.getContentPane().add(RandgeRadioButton);
@@ -203,6 +167,9 @@ public class Window {
 		frmSettings.getContentPane().add(AddItemButton);
 		
 		List AddedItemsList = new List();
+		springLayout.putConstraint(SpringLayout.SOUTH, SelectedList, -188, SpringLayout.NORTH, AddedItemsList);
+		AddedItemsList.setForeground(new Color(255, 255, 255));
+		AddedItemsList.setBackground(new Color(0, 51, 51));
 		springLayout.putConstraint(SpringLayout.WEST, AddItemButton, 85, SpringLayout.EAST, AddedItemsList);
 		springLayout.putConstraint(SpringLayout.WEST, AddItemLabel, 27, SpringLayout.EAST, AddedItemsList);
 		springLayout.putConstraint(SpringLayout.SOUTH, AddedItemsList, -103, SpringLayout.NORTH, StartBtn);
@@ -241,13 +208,6 @@ public class Window {
 		WorldHopperCheckBox.setSelected(true);
 		frmSettings.getContentPane().add(WorldHopperCheckBox);
 		
-		JButton SaveSettingsButton = new JButton("Save Settings");
-		springLayout.putConstraint(SpringLayout.NORTH, SaveSettingsButton, 0, SpringLayout.NORTH, StartBtn);
-		springLayout.putConstraint(SpringLayout.WEST, SaveSettingsButton, 162, SpringLayout.EAST, StartBtn);
-		springLayout.putConstraint(SpringLayout.SOUTH, SaveSettingsButton, 0, SpringLayout.SOUTH, frmSettings.getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, SaveSettingsButton, 0, SpringLayout.EAST, frmSettings.getContentPane());
-		frmSettings.getContentPane().add(SaveSettingsButton);
-		
 		JCheckBox PickUpArrowCheckBox = new JCheckBox("Pick Up Arrow");
 		springLayout.putConstraint(SpringLayout.NORTH, PickUpArrowCheckBox, 6, SpringLayout.SOUTH, WorldHopperCheckBox);
 		springLayout.putConstraint(SpringLayout.EAST, PickUpArrowCheckBox, 0, SpringLayout.EAST, SpecialAttackCheckBox);
@@ -269,8 +229,8 @@ public class Window {
 		springLayout.putConstraint(SpringLayout.WEST, DefendCheckBox, 0, SpringLayout.WEST, BuryBonesCheckBox);
 		frmSettings.getContentPane().add(DefendCheckBox);
 
-
 		/*Action*/
+
 		AddNpcButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -284,7 +244,7 @@ public class Window {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				for(int i = 0; i < SelectedList.getSelectedItems().length; i++) {
-					SelectedList.remove(ScannedList.getSelectedItems()[i]);	
+					SelectedList.remove(SelectedList.getSelectedItems()[i]);
 				}
 			}
 		});
@@ -322,6 +282,7 @@ public class Window {
 						(int)PickupItemCostSpinner.getValue(),
 						SelectedList.getItems(),
 						AddedItemsList.getItems());
+				_main.get_CombatVariables().setStarted(true);
 			}
 		});
 		MagicRadioButton.addMouseListener(new MouseAdapter() {
@@ -345,8 +306,28 @@ public class Window {
 				StrengthCheckBox.setEnabled(true);
 			}
 		});
+		SearchNPCButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
+				for(int i = 0; i < _main.get_factory().get_Npcs().GetAllNpc().size(); i++){
+					if(!hasElement(_main.get_factory().get_Npcs().GetAllNpc().get(i).getName(), ScannedList)){
+						ScannedList.add(_main.get_factory().get_Npcs().GetAllNpc().get(i).getName());
+					}
+				}
+			}
+		});
 	}
 	public JFrame GetJFrame() {
 		return frmSettings;
+	}
+	public static boolean hasElement(Object searched, List list) {
+		for (int a = 0; a < list.getItemCount(); a++) {
+			Object element = list.getItem(a);
+			if (element.equals(searched))  {
+				return true;
+			}
+		}
+		return false;
 	}
 }

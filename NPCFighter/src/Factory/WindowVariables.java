@@ -81,11 +81,11 @@ public class WindowVariables {
 		isUseDefend = useDefend;
 	}
 
-	public Factory.AttackType getAttackType() {
+	public AttackType getAttackType() {
 		return AttackType;
 	}
 
-	public void setAttackType(Factory.AttackType attackType) {
+	public void setAttackType(AttackType attackType) {
 		AttackType = attackType;
 	}
 
