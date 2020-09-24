@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component LANGUAGE_LEVEL="JDK_11" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/target/test-classes"/>
+	<contentEntry url="file://$MODULE_DIR$">
+		<testFolder url="file://$MODULE_DIR$/src/test/java"/>
+		<excludeFolder url="file://$MODULE_DIR$/target"/>
+	</contentEntry>
+	<lib name="jackson-databind-2.9.10.6.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/jackson-databind-2.9.10.6.jar!/"/>
+	</lib>
+	<lib name="jgoodies-forms-1.8.0.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/jgoodies-forms-1.8.0.jar!/"/>
+	</lib>
+	<levels>
+		<level name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.9" value="project"/>
+		<level name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.10.6" value="project"/>
+		<level name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.10" value="project"/>
+	</levels>
+</component>

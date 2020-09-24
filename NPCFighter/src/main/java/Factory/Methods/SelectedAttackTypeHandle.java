@@ -12,6 +12,8 @@ public class SelectedAttackTypeHandle {
     private SkillDetails SelectedSkill;
     public SelectedAttackTypeHandle(Factory factory) {
         _factory = factory;
+    }
+    public void SelectCombatType(){
         switch (_factory.get_main().get_CombatVariables().get_WindowVariables().getAttackType()){
             case Magic:
                 Magic();
@@ -32,6 +34,7 @@ public class SelectedAttackTypeHandle {
                 _factory.getDynamicCombat().getRange();
             }
         }
+        _factory.getCombat().Fight();
     }
     private void Magic(){
         if(ChoseSkill() != null){
@@ -49,6 +52,7 @@ public class SelectedAttackTypeHandle {
                 }
             }
         }
+        _factory.getCombat().Fight();
     }
     private void Melee(){
         if(ChoseSkill() != null){
@@ -60,6 +64,7 @@ public class SelectedAttackTypeHandle {
                 _factory.getDynamicCombat().getMeleeStrenght();
             }
         }
+        _factory.getCombat().Fight();
     }
     private SkillDetails ChoseSkill(){
         SkillDetails  CheckSkillDetails = null;

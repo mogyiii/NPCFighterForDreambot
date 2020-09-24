@@ -6,10 +6,11 @@ import GUI.Window;
 public class CombatVariables {
     private Window _window;
     private WindowVariables _WindowVariables;
-    private boolean isStarted = false;
+    private boolean isStarted;
     public CombatVariables(Window _window) {
         this._window = _window;
         this._WindowVariables = new WindowVariables();
+        this.isStarted = false;
     }
 
     public Window get_window() {

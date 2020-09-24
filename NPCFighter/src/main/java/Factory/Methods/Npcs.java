@@ -1,4 +1,4 @@
-package main.java.Factory.Methods;
+package Factory.Methods;
 
 import Factory.Factory;
 import org.dreambot.api.wrappers.interactive.NPC;

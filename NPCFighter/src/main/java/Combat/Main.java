@@ -13,26 +13,43 @@ public class Main extends AbstractScript {
 	@Override
 	public void onStart() {
 		super.onStart();
-		Window window = new Window(this);
-		_CombatVariables = new CombatVariables(window);
-		get_CombatVariables().get_window().GetJFrame().setVisible(true);
-		_factory = new Factory(this);
+        this._CombatVariables = new CombatVariables(new Window(this));
+        this._factory = new Factory(this);
 	}
 
 	@Override
 	public int onLoop() {
-		if(get_CombatVariables().isStarted()){
+		if(get_CombatVariables().isStarted() && !_factory.get_main().getRandomManager().isSolving()){
 
+			_factory.getSelectedAttackTypeHandle().SelectCombatType();
+
+			_factory.getAntiBan();
+			_factory.get_main().getRandomManager().runRandomManager();
+		}else if(!_factory.get_main().getRandomManager().isSolving() && !get_CombatVariables().isStarted()){
+			get_CombatVariables().get_window().setVisible(true);
 		}
-		//log("Work?");
+		log("Work?");
 		return ((int) (Math.random() * 200));
 	}
 
-	public CombatVariables get_CombatVariables() {
+    @Override
+    public void onExit() {
+        super.onExit();
+        get_CombatVariables().get_window().setVisible(false);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        get_CombatVariables().get_window().setVisible(false);
+    }
+
+    public CombatVariables get_CombatVariables() {
 		return _CombatVariables;
 	}
 
 	public Factory get_factory() {
 		return _factory;
 	}
+
 }
