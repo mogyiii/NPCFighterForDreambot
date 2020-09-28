@@ -2,34 +2,34 @@ package Moduls;
 
 import com.google.gson.Gson;
 
-import java.awt.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Json {
 
     public String getJson(String JsonPath){
-        File JsonFile;
-        String JsonString = null;
+        BufferedReader reader = null;
+        String line = null;
         try {
-
-            JsonFile = new File(Toolkit.getDefaultToolkit().getClass().getResource(JsonPath).toURI());
-            Scanner myReader = new Scanner(JsonFile);
-            while (myReader.hasNextLine()) {
-                JsonString += myReader.nextLine();
-            }
-            myReader.close();
-        } catch (URISyntaxException | FileNotFoundException e) {
+            reader = new BufferedReader(new InputStreamReader(this.getClass().getResource(JsonPath).openStream()));
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        /*StringBuilder JsonString = new StringBuilder();
-        for(int i = 0; i < JsonLine.size() -1; i++ ){
-            JsonString.append(JsonLine.get(i));
-        }*/
-        System.out.println(JsonString);
-        return JsonString;
+        StringBuilder content = new StringBuilder();
+
+
+        while (true) {
+            try {
+                if (!((line = reader.readLine()) != null)) break;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            content.append(line);
+            content.append(System.lineSeparator());
+        }
+
+        return content.toString();
 
     }
     public Gson GetNewGson(){

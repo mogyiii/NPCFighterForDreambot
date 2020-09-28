@@ -2,6 +2,7 @@ package Factory;
 
 import Combat.Main;
 import Factory.Methods.*;
+import Moduls.DownloadFiles;
 import Moduls.Json;
 
 public class Factory {
@@ -16,6 +17,7 @@ public class Factory {
     private Eat _EAT;
     private Json JSON;
     private InterfaceWidgets _IW;
+    private DownloadFiles _DF;
     public Factory(Main main) {
         this._main = main;
         this._Npcs = new Npcs(this);
@@ -27,6 +29,7 @@ public class Factory {
         this._CB = new Combat(this);
         this._EAT = new Eat(this);
         this.JSON = new Json();
+        this._DF = new DownloadFiles();
         this._IW  = new InterfaceWidgets(this);
     }
 
@@ -68,7 +71,9 @@ public class Factory {
     public Json getJSON() {
         return JSON;
     }
-
+    public DownloadFiles getDownload(){
+        return _DF;
+    }
     public InterfaceWidgets getInterfaceWidgets() {
         return _IW;
     }

@@ -59,7 +59,8 @@ public class DynamicCombat {
         return SpellWithStaffDefend;
     }
     public Spell GetStrongestSpellWhichCast(){
-        AttackSpellModel[] spellModel = _factory.getJSON().GetNewGson().fromJson(_factory.getJSON().getJson("AttackSpells.json"), AttackSpellModel[].class);
+        AttackSpellModel[] spellModel;
+        spellModel = _factory.getJSON().GetNewGson().fromJson(_factory.getJSON().getJson("AttackSpells.json"), AttackSpellModel[].class);
         for(int i = 0; i < spellModel.length - 1; i++){
             if(_factory.get_main().getMagic().canCast(Normal.valueOf(spellModel[i].Spell))){
                 return Normal.valueOf(spellModel[i].Spell);
