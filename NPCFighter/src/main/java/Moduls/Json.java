@@ -1,17 +1,38 @@
 package Moduls;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
-import java.io.IOException;
+import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
+import java.util.Scanner;
 
 public class Json {
-    private static ObjectMapper objectMapper = getDefultObjectMapper();
-    public static ObjectMapper getDefultObjectMapper(){
-        ObjectMapper DefaultObjectMapper = new ObjectMapper();
-        return DefaultObjectMapper;
+
+    public String getJson(String JsonPath){
+        File JsonFile;
+        String JsonString = null;
+        try {
+
+            JsonFile = new File(Toolkit.getDefaultToolkit().getClass().getResource(JsonPath).toURI());
+            Scanner myReader = new Scanner(JsonFile);
+            while (myReader.hasNextLine()) {
+                JsonString += myReader.nextLine();
+            }
+            myReader.close();
+        } catch (URISyntaxException | FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        /*StringBuilder JsonString = new StringBuilder();
+        for(int i = 0; i < JsonLine.size() -1; i++ ){
+            JsonString.append(JsonLine.get(i));
+        }*/
+        System.out.println(JsonString);
+        return JsonString;
+
     }
-    public JsonNode parse(String data) throws IOException{
-        return objectMapper.readTree(data);
+    public Gson GetNewGson(){
+        return new Gson();
     }
 }

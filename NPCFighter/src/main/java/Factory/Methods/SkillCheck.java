@@ -9,6 +9,9 @@ public class SkillCheck{
     private int SkillCount = 0;
     public SkillCheck(Factory factory) {
         _factory = factory;
+
+    }
+    public void SkillCheckSelectType(){
         if(_factory.get_main().get_CombatVariables().get_WindowVariables().isUseAttack()){
             _skillDetails[SkillCount] = new SkillDetails("Attack", _factory.get_main().getSkills().getRealLevel(Skill.ATTACK));
             SkillCount++;
@@ -22,7 +25,6 @@ public class SkillCheck{
             SkillCount++;
         }
     }
-
     public SkillDetails[] get_skillDetails() {
         return _skillDetails;
     }

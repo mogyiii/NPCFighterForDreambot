@@ -4,8 +4,6 @@ import Factory.Factory;
 import org.dreambot.api.methods.container.impl.equipment.EquipmentSlot;
 import org.dreambot.api.methods.skills.Skill;
 
-import java.io.IOException;
-
 
 public class SelectedAttackTypeHandle {
     private Factory _factory;
@@ -14,24 +12,26 @@ public class SelectedAttackTypeHandle {
         _factory = factory;
     }
     public void SelectCombatType(){
-        switch (_factory.get_main().get_CombatVariables().get_WindowVariables().getAttackType()){
-            case Magic:
-                Magic();
-                break;
-            case Melee:
-                Melee();
-                break;
-            case Range:
-                Range();
-                break;
+        if(!_factory.get_main().getLocalPlayer().isMoving()){
+            switch (_factory.get_main().get_CombatVariables().get_WindowVariables().getAttackType()){
+                case Magic:
+                    Magic();
+                    break;
+                case Melee:
+                    Melee();
+                    break;
+                case Range:
+                    Range();
+                    break;
+            }
         }
     }
     private void Range(){
         if(ChoseSkill() != null){
             if(ChoseSkill().get_Name().equals("Defend")){
-                _factory.getDynamicCombat().getRangeWithDefend();
+                _factory.getDynamicCombat().getRangeWithDefend().interact();
             }else if(ChoseSkill().get_Name().equals("")){
-                _factory.getDynamicCombat().getRange();
+                _factory.getDynamicCombat().getRange().interact();
             }
         }
         _factory.getCombat().Fight();
@@ -39,15 +39,15 @@ public class SelectedAttackTypeHandle {
     private void Magic(){
         if(ChoseSkill() != null){
             if(ChoseSkill().get_Name().equals("Defend") && EquipmentSlot.WEAPON.toString().contains("Staff")){
-                _factory.getDynamicCombat().getSpellWithStaffDefend();
-                _factory.getDynamicCombat().getCombatMenuAltMenuSpellList();
+                _factory.getDynamicCombat().getSpellWithStaffDefend().interact();
+                _factory.getDynamicCombat().getCombatMenuAltMenuSpellList().interact();
             }else if(ChoseSkill().get_Name().equals("Magic") && EquipmentSlot.WEAPON.toString().contains("Staff")){
-                _factory.getDynamicCombat().getSpellWithStaff();
-                _factory.getDynamicCombat().getCombatMenuAltMenuSpellList();
+                _factory.getDynamicCombat().getSpellWithStaff().interact();
+                _factory.getDynamicCombat().getCombatMenuAltMenuSpellList().interact();
             }else{
                 try{
-                    _factory.getDynamicCombat().GetStrongestSpellWhichCast();
-                }catch (IOException e){
+                    _factory.get_main().getMagic().castSpell(_factory.getDynamicCombat().GetStrongestSpellWhichCast());
+                }catch (Exception e){
                     _factory.get_main().log("Magic spell Json can't open: " + e.toString());
                 }
             }
@@ -57,11 +57,11 @@ public class SelectedAttackTypeHandle {
     private void Melee(){
         if(ChoseSkill() != null){
             if(ChoseSkill().get_Name().equals("Attack")){
-                _factory.getDynamicCombat().getMeleeAttack();
+                _factory.getDynamicCombat().getMeleeAttack().interact();
             }else if(ChoseSkill().get_Name().equals("Defend")){
-                _factory.getDynamicCombat().getMeleeDefend();
+                _factory.getDynamicCombat().getMeleeDefend().interact();
             }else if(ChoseSkill().get_Name().equals("Strength")){
-                _factory.getDynamicCombat().getMeleeStrenght();
+                _factory.getDynamicCombat().getMeleeStrenght().interact();
             }
         }
         _factory.getCombat().Fight();

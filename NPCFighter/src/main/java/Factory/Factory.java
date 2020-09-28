@@ -1,7 +1,8 @@
 package Factory;
+
 import Combat.Main;
 import Factory.Methods.*;
-import Factory.Methods.Npcs;
+import Moduls.Json;
 
 public class Factory {
     private Main _main;
@@ -12,6 +13,9 @@ public class Factory {
     private SelectedAttackTypeHandle _SATH;
     private DynamicCombat _DC;
     private Combat _CB;
+    private Eat _EAT;
+    private Json JSON;
+    private InterfaceWidgets _IW;
     public Factory(Main main) {
         this._main = main;
         this._Npcs = new Npcs(this);
@@ -21,6 +25,9 @@ public class Factory {
         this._DC = new DynamicCombat(this);
         this._SATH = new SelectedAttackTypeHandle(this);
         this._CB = new Combat(this);
+        this._EAT = new Eat(this);
+        this.JSON = new Json();
+        this._IW  = new InterfaceWidgets(this);
     }
 
     public Main get_main() {
@@ -52,5 +59,17 @@ public class Factory {
     }
     public Combat getCombat(){
         return _CB;
+    }
+
+    public Eat getEAT() {
+        return _EAT;
+    }
+
+    public Json getJSON() {
+        return JSON;
+    }
+
+    public InterfaceWidgets getInterfaceWidgets() {
+        return _IW;
     }
 }

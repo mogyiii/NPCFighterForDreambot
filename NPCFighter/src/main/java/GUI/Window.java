@@ -120,13 +120,13 @@ public class Window extends JFrame{
 
 		ScannedList.setForeground(new Color(255, 255, 255));
 		ScannedList.setBackground(new Color(0, 51, 51));
-		//ScannedList.setMultipleSelections(true);
+		ScannedList.setMultipleSelections(true);
 		springLayout.putConstraint(SpringLayout.NORTH, ScannedList, 20, SpringLayout.NORTH, contentPane);
         contentPane.add(ScannedList);
 
 		SelectedList.setForeground(new Color(255, 255, 255));
 		SelectedList.setBackground(new Color(0, 51, 51));
-		//SelectedList.setMultipleSelections(true);
+		SelectedList.setMultipleSelections(true);
         contentPane.add(SelectedList);
 
         AddNpcButton.setText("<-");
@@ -179,6 +179,7 @@ public class Window extends JFrame{
 		springLayout.putConstraint(SpringLayout.EAST, GPLabel, -5, SpringLayout.EAST, contentPane);
         contentPane.add(GPLabel);
 
+		AreaSizeField.setValue(8);
 		springLayout.putConstraint(SpringLayout.NORTH, AreaSizeField, 18, SpringLayout.SOUTH, PickupItemCostSpinner);
 		springLayout.putConstraint(SpringLayout.WEST, AreaSizeField, 355, SpringLayout.WEST, contentPane);
 		springLayout.putConstraint(SpringLayout.EAST, AreaSizeField, 0, SpringLayout.EAST, PickupItemCostSpinner);
@@ -241,7 +242,7 @@ public class Window extends JFrame{
 		springLayout.putConstraint(SpringLayout.WEST, AddItemButton, 85, SpringLayout.EAST, AddedItemsList);
 		springLayout.putConstraint(SpringLayout.WEST, AddItemLabel, 27, SpringLayout.EAST, AddedItemsList);
 		springLayout.putConstraint(SpringLayout.SOUTH, AddedItemsList, -103, SpringLayout.NORTH, StartBtn);
-		//AddedItemsList.setMultipleSelections(true);
+		AddedItemsList.setMultipleSelections(true);
 		springLayout.putConstraint(SpringLayout.WEST, AddedItemsList, 10, SpringLayout.WEST, contentPane);
 		springLayout.putConstraint(SpringLayout.EAST, AddedItemsList, 210, SpringLayout.WEST, contentPane);
         contentPane.add(AddedItemsList);
@@ -327,7 +328,7 @@ public class Window extends JFrame{
             contentPane.setMinimumSize(preferredSize);
             contentPane.setPreferredSize(preferredSize);
         }
-        contentPane.setPreferredSize(new Dimension(453, 629));
+        contentPane.setPreferredSize(new Dimension(453, 589));
         pack();
         setLocationRelativeTo(getOwner());
     }

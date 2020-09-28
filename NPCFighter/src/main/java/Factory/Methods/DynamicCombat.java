@@ -2,13 +2,9 @@ package Factory.Methods;
 
 import Factory.Factory;
 import Factory.Models.AttackSpellModel;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.dreambot.api.methods.magic.Normal;
 import org.dreambot.api.methods.magic.Spell;
 import org.dreambot.api.wrappers.widgets.WidgetChild;
-
-import java.io.File;
-import java.io.IOException;
 
 public class DynamicCombat {
     private Factory _factory;
@@ -62,12 +58,11 @@ public class DynamicCombat {
     public WidgetChild getSpellWithStaffDefend() {
         return SpellWithStaffDefend;
     }
-    public Spell GetStrongestSpellWhichCast() throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        AttackSpellModel[] spellModel = mapper.readValue(new File(".../Lists/AttackSpell.json"), AttackSpellModel[].class);
+    public Spell GetStrongestSpellWhichCast(){
+        AttackSpellModel[] spellModel = _factory.getJSON().GetNewGson().fromJson(_factory.getJSON().getJson("AttackSpells.json"), AttackSpellModel[].class);
         for(int i = 0; i < spellModel.length - 1; i++){
-            if(_factory.get_main().getMagic().canCast(Normal.valueOf(spellModel[i].spell))){
-                return Normal.valueOf(spellModel[i].spell);
+            if(_factory.get_main().getMagic().canCast(Normal.valueOf(spellModel[i].Spell))){
+                return Normal.valueOf(spellModel[i].Spell);
             }
         }
         return null;

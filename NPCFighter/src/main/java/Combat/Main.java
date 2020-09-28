@@ -2,6 +2,7 @@ package Combat;
 
 import Factory.Factory;
 import GUI.Window;
+import org.dreambot.api.methods.Calculations;
 import org.dreambot.api.script.AbstractScript;
 import org.dreambot.api.script.Category;
 import org.dreambot.api.script.ScriptManifest;
@@ -20,16 +21,17 @@ public class Main extends AbstractScript {
 	@Override
 	public int onLoop() {
 		if(get_CombatVariables().isStarted() && !_factory.get_main().getRandomManager().isSolving()){
-
+			get_CombatVariables().get_window().setVisible(false);
 			_factory.getSelectedAttackTypeHandle().SelectCombatType();
 
-			_factory.getAntiBan();
+
+			_factory.getEAT().Eating();
+			_factory.getAntiBan().RandomAntiBan();
 			_factory.get_main().getRandomManager().runRandomManager();
 		}else if(!_factory.get_main().getRandomManager().isSolving() && !get_CombatVariables().isStarted()){
 			get_CombatVariables().get_window().setVisible(true);
 		}
-		log("Work?");
-		return ((int) (Math.random() * 200));
+		return Calculations.random(300, 500);
 	}
 
     @Override

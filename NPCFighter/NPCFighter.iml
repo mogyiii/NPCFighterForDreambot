@@ -31,26 +31,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library name="jackson-databind-2.9.10.6.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/jackson-databind-2.9.10.6.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="jgoodies-forms-1.8.0.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/jgoodies-forms-1.8.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="library" exported="" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.9" level="project" />
-    <orderEntry type="library" exported="" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.10.6" level="project" />
-    <orderEntry type="library" exported="" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.10" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.1.41" level="project" />
   </component>
 </module>

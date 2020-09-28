@@ -1,0 +1,38 @@
+[
+  {
+    "Name": "Strength potion",
+    "Type": "Strength"
+  },
+  {
+    "Name": "Prayer potion",
+    "Type": "Prayer"
+  },
+  {
+    "Name": "Energy potion",
+    "Type": "Energy"
+  },
+  {
+    "Name": "Attack potion",
+    "Type": "Attack"
+  },
+  {
+    "Name": "Defence potion",
+    "Type": "Defence"
+  },
+  {
+    "Name": "Super attack",
+    "Type": "Attack"
+  },
+  {
+    "Name": "Super strength",
+    "Type": "Strength"
+  },
+  {
+    "Name": "Ranging potion",
+    "Type": "Ranging"
+  },
+  {
+    "Name": "Magic potion",
+    "Type": "Magic"
+  }
+]
