@@ -12,6 +12,6 @@ public class Npcs {
     }
 
     public List<NPC> GetAllNpc(){
-        return _factory.get_main().getNpcs().all();
+        return _factory.getMain().getNpcs().all();
     }
 }

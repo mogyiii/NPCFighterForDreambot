@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Mate/DreamBot/BotData/client-3.0.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="jackson-databind-2.9.10.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

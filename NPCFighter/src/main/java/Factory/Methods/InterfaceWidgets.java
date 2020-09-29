@@ -17,14 +17,14 @@ public class InterfaceWidgets {
     private WidgetChild Invertory;
     public InterfaceWidgets(Factory factory) {
         this._factory = factory;
-        FriendList = _factory.get_main().getWidgets().getChildWidget(164, 46);
-        Emote = _factory.get_main().getWidgets().getChildWidget(164, 48);
-        Worn = _factory.get_main().getWidgets().getChildWidget(164, 64);
-        Quests = _factory.get_main().getWidgets().getChildWidget(164, 62);
-        Musics = _factory.get_main().getWidgets().getChildWidget(164, 49);
-        Clan = _factory.get_main().getWidgets().getChildWidget(164, 44);
-        Settings = _factory.get_main().getWidgets().getChildWidget(164, 47);
-        Invertory = _factory.get_main().getWidgets().getChildWidget(164, 63);
+        FriendList = _factory.getMain().getWidgets().getChildWidget(164, 46);
+        Emote = _factory.getMain().getWidgets().getChildWidget(164, 48);
+        Worn = _factory.getMain().getWidgets().getChildWidget(164, 64);
+        Quests = _factory.getMain().getWidgets().getChildWidget(164, 62);
+        Musics = _factory.getMain().getWidgets().getChildWidget(164, 49);
+        Clan = _factory.getMain().getWidgets().getChildWidget(164, 44);
+        Settings = _factory.getMain().getWidgets().getChildWidget(164, 47);
+        Invertory = _factory.getMain().getWidgets().getChildWidget(164, 63);
     }
     public WidgetChild GetRandomInterfaceTab(){
         WidgetChild[] Widgets = new WidgetChild[]{FriendList, Emote, Worn, Quests, Musics, Clan, Settings, Invertory};

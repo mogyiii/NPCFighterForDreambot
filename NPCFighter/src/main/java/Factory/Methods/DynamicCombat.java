@@ -18,14 +18,14 @@ public class DynamicCombat {
     private WidgetChild CombatMenuAltMenuSpellList;
     public DynamicCombat(Factory factory) {
         _factory = factory;
-        MeleeAttack = _factory.get_main().getWidgets().getWidgetChild(593, 5);
-        MeleeStrenght = _factory.get_main().getWidgets().getWidgetChild(593, 13);
-        MeleeDefend = _factory.get_main().getWidgets().getWidgetChild(593, 17);
-        Range = _factory.get_main().getWidgets().getWidgetChild(593, 5);
-        RangeWithDefend = _factory.get_main().getWidgets().getWidgetChild(593, 17);
-        SpellWithStaff = _factory.get_main().getWidgets().getWidgetChild(593, 27);
-        SpellWithStaffDefend = _factory.get_main().getWidgets().getWidgetChild(593, 22);
-        CombatMenuAltMenuSpellList = _factory.get_main().getWidgets().getWidgetChild(201, 1);
+        MeleeAttack = _factory.getMain().getWidgets().getWidgetChild(593, 5);
+        MeleeStrenght = _factory.getMain().getWidgets().getWidgetChild(593, 13);
+        MeleeDefend = _factory.getMain().getWidgets().getWidgetChild(593, 17);
+        Range = _factory.getMain().getWidgets().getWidgetChild(593, 5);
+        RangeWithDefend = _factory.getMain().getWidgets().getWidgetChild(593, 17);
+        SpellWithStaff = _factory.getMain().getWidgets().getWidgetChild(593, 27);
+        SpellWithStaffDefend = _factory.getMain().getWidgets().getWidgetChild(593, 22);
+        CombatMenuAltMenuSpellList = _factory.getMain().getWidgets().getWidgetChild(201, 1);
     }
     public WidgetChild getMeleeAttack() {
         return MeleeAttack;
@@ -62,7 +62,7 @@ public class DynamicCombat {
         AttackSpellModel[] spellModel;
         spellModel = _factory.getJSON().GetNewGson().fromJson(_factory.getJSON().getJson("AttackSpells.json"), AttackSpellModel[].class);
         for(int i = 0; i < spellModel.length - 1; i++){
-            if(_factory.get_main().getMagic().canCast(Normal.valueOf(spellModel[i].Spell))){
+            if(_factory.getMain().getMagic().canCast(Normal.valueOf(spellModel[i].Spell))){
                 return Normal.valueOf(spellModel[i].Spell);
             }
         }

@@ -1,5 +1,6 @@
 package Moduls;
 
+import Factory.Factory;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -7,6 +8,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Json {
+    private Factory _factory;
+    public Json(Factory factory) {
+        _factory = factory;
+    }
 
     public String getJson(String JsonPath){
         BufferedReader reader = null;

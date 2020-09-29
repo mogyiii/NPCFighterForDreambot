@@ -2,7 +2,7 @@ package Factory;
 
 import Combat.Main;
 import Factory.Methods.*;
-import Moduls.DownloadFiles;
+import Moduls.DownloadData;
 import Moduls.Json;
 
 public class Factory {
@@ -17,7 +17,14 @@ public class Factory {
     private Eat _EAT;
     private Json JSON;
     private InterfaceWidgets _IW;
-    private DownloadFiles _DF;
+    private DownloadData _DF;
+    private ChatBot _ChatBot;
+    private Items Items;
+    private DrinkPotions Potions;
+    private BotArea BotArea;
+    private Walking Walking;
+    private Banking Banking;
+    private Ground ground;
     public Factory(Main main) {
         this._main = main;
         this._Npcs = new Npcs(this);
@@ -28,16 +35,23 @@ public class Factory {
         this._SATH = new SelectedAttackTypeHandle(this);
         this._CB = new Combat(this);
         this._EAT = new Eat(this);
-        this.JSON = new Json();
-        this._DF = new DownloadFiles();
+        this.JSON = new Json(this);
+        this._DF = new DownloadData(this);
         this._IW  = new InterfaceWidgets(this);
+        this._ChatBot = new ChatBot(this);
+        this.Items = new Items(this);
+        this.Potions = new DrinkPotions(this);
+        this.BotArea = new BotArea(this);
+        this.Walking = new Walking(this);
+        this.Banking = new Banking(this);
+        this.ground = new Ground(this);
     }
 
-    public Main get_main() {
+    public Main getMain() {
         return _main;
     }
 
-    public Npcs get_Npcs() {
+    public Npcs getNpcs() {
         return _Npcs;
     }
 
@@ -71,10 +85,36 @@ public class Factory {
     public Json getJSON() {
         return JSON;
     }
-    public DownloadFiles getDownload(){
+    public DownloadData getDownload(){
         return _DF;
     }
     public InterfaceWidgets getInterfaceWidgets() {
         return _IW;
+    }
+
+    public ChatBot getChatBot() {
+        return _ChatBot;
+    }
+
+    public Items getItems() {
+        return Items;
+    }
+
+    public DrinkPotions getPotions() {
+        return Potions;
+    }
+
+    public BotArea getBotArea() {
+        return BotArea;
+    }
+    public Walking getWalking(){
+        return Walking;
+    }
+
+    public Banking getBanking() {
+        return Banking;
+    }
+    public Ground getGround() {
+        return ground;
     }
 }

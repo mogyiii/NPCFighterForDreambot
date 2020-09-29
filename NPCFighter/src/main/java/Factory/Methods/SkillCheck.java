@@ -12,16 +12,16 @@ public class SkillCheck{
 
     }
     public void SkillCheckSelectType(){
-        if(_factory.get_main().get_CombatVariables().get_WindowVariables().isUseAttack()){
-            _skillDetails[SkillCount] = new SkillDetails("Attack", _factory.get_main().getSkills().getRealLevel(Skill.ATTACK));
+        if(_factory.getMain().get_CombatVariables().get_WindowVariables().isUseAttack()){
+            _skillDetails[SkillCount] = new SkillDetails("Attack", _factory.getMain().getSkills().getRealLevel(Skill.ATTACK));
             SkillCount++;
         }
-        if(_factory.get_main().get_CombatVariables().get_WindowVariables().isUseDefend()){
-            _skillDetails[SkillCount] = new SkillDetails("Defend", _factory.get_main().getSkills().getRealLevel(Skill.DEFENCE));
+        if(_factory.getMain().get_CombatVariables().get_WindowVariables().isUseDefend()){
+            _skillDetails[SkillCount] = new SkillDetails("Defend", _factory.getMain().getSkills().getRealLevel(Skill.DEFENCE));
             SkillCount++;
         }
-        if(_factory.get_main().get_CombatVariables().get_WindowVariables().isUseStrength()){
-            _skillDetails[SkillCount] = new SkillDetails("Strength", _factory.get_main().getSkills().getRealLevel(Skill.STRENGTH));
+        if(_factory.getMain().get_CombatVariables().get_WindowVariables().isUseStrength()){
+            _skillDetails[SkillCount] = new SkillDetails("Strength", _factory.getMain().getSkills().getRealLevel(Skill.STRENGTH));
             SkillCount++;
         }
     }

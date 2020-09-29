@@ -12,8 +12,8 @@ public class SelectedAttackTypeHandle {
         _factory = factory;
     }
     public void SelectCombatType(){
-        if(!_factory.get_main().getLocalPlayer().isMoving()){
-            switch (_factory.get_main().get_CombatVariables().get_WindowVariables().getAttackType()){
+        if(!_factory.getMain().getLocalPlayer().isMoving()){
+            switch (_factory.getMain().get_CombatVariables().get_WindowVariables().getAttackType()){
                 case Magic:
                     Magic();
                     break;
@@ -46,9 +46,9 @@ public class SelectedAttackTypeHandle {
                 _factory.getDynamicCombat().getCombatMenuAltMenuSpellList().interact();
             }else{
                 try{
-                    _factory.get_main().getMagic().castSpell(_factory.getDynamicCombat().GetStrongestSpellWhichCast());
+                    _factory.getMain().getMagic().castSpell(_factory.getDynamicCombat().GetStrongestSpellWhichCast());
                 }catch (Exception e){
-                    _factory.get_main().log("Magic spell Json can't open: " + e.toString());
+                    _factory.getMain().log("Magic spell Json can't open: " + e.toString());
                 }
             }
         }
@@ -70,7 +70,7 @@ public class SelectedAttackTypeHandle {
         SkillDetails  CheckSkillDetails = null;
         int SmallestIncrease = 99;
         for(int i = 0; i < _factory.getSkillCheck().get_skillDetails().length; i++){
-            int SelectedSkillUpped = _factory.get_main().getSkills().getRealLevel(Skill.valueOf(_factory.getSkillCheck().get_skillDetails()[i].get_Name())) - _factory.getSkillCheck().get_skillDetails()[i].get_StartLevel();
+            int SelectedSkillUpped = _factory.getMain().getSkills().getRealLevel(Skill.valueOf(_factory.getSkillCheck().get_skillDetails()[i].get_Name())) - _factory.getSkillCheck().get_skillDetails()[i].get_StartLevel();
             if(SelectedSkillUpped < SmallestIncrease){
                 CheckSkillDetails = _factory.getSkillCheck().get_skillDetails()[i];
             }

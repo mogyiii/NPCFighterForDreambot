@@ -1,5 +1,6 @@
 package Factory.Methods;
 
+import Factory.Enums.InteractionCenter;
 import Factory.Factory;
 import Factory.Models.FoodsModel;
 import org.dreambot.api.methods.skills.Skill;
@@ -11,23 +12,24 @@ public class Eat {
     }
     public void Eating(){
         try{
-            if(_factory.get_main().getInventory().get(getEdibleFoodFromInvertory()).interact("Eat")){
+            if(_factory.getMain().getInventory().get(getEdibleFoodFromInvertory()).interact(InteractionCenter.Eat.toString())){
                 _factory.getInteractionUser().SetActivity("Eating...");
             }
         }catch (Exception e){
-            _factory.get_main().log("Food error: " + e.toString());
+            _factory.getMain().log("Food error: " + e.toString());
+
         }
     }
     public String getEdibleFoodFromInvertory(){
         FoodsModel[] FoodModel =  _factory.getJSON().GetNewGson().fromJson(_factory.getJSON().getJson("Foods.json"), FoodsModel[].class);
         for (int i = 0; i < FoodModel.length; i++) {
-            if (getMissingHitpoints() > FoodModel[i].Heals && _factory.get_main().getInventory().contains(FoodModel[i].Food)) {
+            if (getMissingHitpoints() > FoodModel[i].Heals && _factory.getMain().getInventory().contains(FoodModel[i].Food)) {
                 return FoodModel[i].Food;
             }
         }
         return null;
     }
     private int getMissingHitpoints(){
-        return _factory.get_main().getSkills().getRealLevel(Skill.HITPOINTS) +_factory.get_main().getSkills().getBoostedLevels(Skill.HITPOINTS);
+        return _factory.getMain().getSkills().getRealLevel(Skill.HITPOINTS) +_factory.getMain().getSkills().getBoostedLevels(Skill.HITPOINTS);
     }
 }

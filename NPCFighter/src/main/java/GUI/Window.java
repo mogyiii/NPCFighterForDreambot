@@ -103,9 +103,9 @@ public class Window extends JFrame{
         StrengthCheckBox.setEnabled(str);
     }
     private void SearchNpc(ActionEvent e){
-        for(int i = 0; i < _main.get_factory().get_Npcs().GetAllNpc().size(); i++){
-            if(!hasElement(_main.get_factory().get_Npcs().GetAllNpc().get(i).getName(), ScannedList)){
-                ScannedList.add(_main.get_factory().get_Npcs().GetAllNpc().get(i).getName());
+        for(int i = 0; i < _main.get_factory().getNpcs().GetAllNpc().size(); i++){
+            if(!hasElement(_main.get_factory().getNpcs().GetAllNpc().get(i).getName(), ScannedList)){
+                ScannedList.add(_main.get_factory().getNpcs().GetAllNpc().get(i).getName());
             }
         }
     }
