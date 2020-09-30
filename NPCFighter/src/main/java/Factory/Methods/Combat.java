@@ -15,8 +15,8 @@ public class Combat {
             _factory.getMain().getCombat().toggleSpecialAttack(true);
         }
         if(!_factory.getMain().getLocalPlayer().isInCombat()){
-            for(int i = 0; i < _factory.getMain().get_CombatVariables().get_WindowVariables().getSelectedList().length - 1; i++){
-                for(int j = 0; j < _factory.getMain().getNpcs().all(_factory.getMain().get_CombatVariables().get_WindowVariables().getSelectedList()[i]).size() - 1 ; j++){
+            for(int i = 0; i < _factory.getMain().get_CombatVariables().get_WindowVariables().getSelectedList().length; i++){
+                for(int j = 0; j < _factory.getMain().getNpcs().all(_factory.getMain().get_CombatVariables().get_WindowVariables().getSelectedList()[i]).size(); j++){
 
                     if((!_factory.getMain().getNpcs().all(_factory.getMain().get_CombatVariables().get_WindowVariables().getSelectedList()[i]).get(j).isInCombat()
                             ||

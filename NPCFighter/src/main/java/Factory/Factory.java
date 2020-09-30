@@ -2,7 +2,9 @@ package Factory;
 
 import Combat.Main;
 import Factory.Methods.*;
+import Factory.Paint.InterfaceGraphics;
 import Moduls.DownloadData;
+import Moduls.GrandExchangeApi;
 import Moduls.Json;
 
 public class Factory {
@@ -25,6 +27,8 @@ public class Factory {
     private Walking Walking;
     private Banking Banking;
     private Ground ground;
+    private InterfaceGraphics InterfaceGraphics;
+    private GrandExchangeApi grandExchangeApi;
     public Factory(Main main) {
         this._main = main;
         this._Npcs = new Npcs(this);
@@ -45,6 +49,7 @@ public class Factory {
         this.Walking = new Walking(this);
         this.Banking = new Banking(this);
         this.ground = new Ground(this);
+        this.InterfaceGraphics = new InterfaceGraphics(this);
     }
 
     public Main getMain() {
@@ -116,5 +121,13 @@ public class Factory {
     }
     public Ground getGround() {
         return ground;
+    }
+
+    public InterfaceGraphics getInterfaceGraphics() {
+        return InterfaceGraphics;
+    }
+
+    public GrandExchangeApi getGrandExchangeApi() {
+        return new GrandExchangeApi(true);
     }
 }

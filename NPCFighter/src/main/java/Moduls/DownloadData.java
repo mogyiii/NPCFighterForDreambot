@@ -21,4 +21,5 @@ public class DownloadData {
         while ((s = reader.readLine()) != null){}
         return s;
     }
+
 }

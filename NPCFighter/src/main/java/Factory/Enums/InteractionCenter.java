@@ -4,5 +4,7 @@ public enum InteractionCenter {
     Eat,
     Drink,
     Attack,
-    Bank
+    Bank,
+    Take,
+    Bury
 }
