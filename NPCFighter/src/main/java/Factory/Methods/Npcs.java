@@ -1,6 +1,7 @@
 package Factory.Methods;
 
 import Factory.Factory;
+import org.dreambot.api.methods.interactive.NPCs;
 import org.dreambot.api.wrappers.interactive.NPC;
 
 import java.util.List;
@@ -12,6 +13,6 @@ public class Npcs {
     }
 
     public List<NPC> GetAllNpc(){
-        return _factory.getMain().getNpcs().all();
+        return NPCs.all();
     }
 }

@@ -2,7 +2,11 @@ package Factory.Methods;
 
 import Factory.Factory;
 import org.dreambot.api.methods.container.impl.equipment.EquipmentSlot;
+import org.dreambot.api.methods.magic.Magic;
 import org.dreambot.api.methods.skills.Skill;
+import org.dreambot.api.methods.skills.Skills;
+import org.dreambot.api.methods.tabs.Tab;
+import org.dreambot.api.methods.tabs.Tabs;
 
 
 public class SelectedAttackTypeHandle {
@@ -28,6 +32,7 @@ public class SelectedAttackTypeHandle {
     }
     private void Range(){
         if(ChoseSkill() != null){
+            Tabs.openWithMouse(Tab.COMBAT);
             if(ChoseSkill().get_Name().equals("Defend")){
                 _factory.getDynamicCombat().getRangeWithDefend().interact();
             }else if(ChoseSkill().get_Name().equals("")){
@@ -38,6 +43,7 @@ public class SelectedAttackTypeHandle {
     }
     private void Magic(){
         if(ChoseSkill() != null){
+            Tabs.openWithMouse(Tab.COMBAT);
             if(ChoseSkill().get_Name().equals("Defend") && EquipmentSlot.WEAPON.toString().contains("Staff")){
                 _factory.getDynamicCombat().getSpellWithStaffDefend().interact();
                 _factory.getDynamicCombat().getCombatMenuAltMenuSpellList().interact();
@@ -46,7 +52,7 @@ public class SelectedAttackTypeHandle {
                 _factory.getDynamicCombat().getCombatMenuAltMenuSpellList().interact();
             }else{
                 try{
-                    _factory.getMain().getMagic().castSpell(_factory.getDynamicCombat().GetStrongestSpellWhichCast());
+                    Magic.castSpell(_factory.getDynamicCombat().GetStrongestSpellWhichCast());
                 }catch (Exception e){
                     _factory.getMain().log("Magic spell Json can't open: " + e.toString());
                 }
@@ -56,6 +62,7 @@ public class SelectedAttackTypeHandle {
     }
     private void Melee(){
         if(ChoseSkill() != null){
+            Tabs.openWithMouse(Tab.COMBAT);
             if(ChoseSkill().get_Name().equals("Attack")){
                 _factory.getDynamicCombat().getMeleeAttack().interact();
             }else if(ChoseSkill().get_Name().equals("Defend")){
@@ -70,7 +77,7 @@ public class SelectedAttackTypeHandle {
         SkillDetails  CheckSkillDetails = null;
         int SmallestIncrease = 99;
         for(int i = 0; i < _factory.getSkillCheck().get_skillDetails().length; i++){
-            int SelectedSkillUpped = _factory.getMain().getSkills().getRealLevel(Skill.valueOf(_factory.getSkillCheck().get_skillDetails()[i].get_Name())) - _factory.getSkillCheck().get_skillDetails()[i].get_StartLevel();
+            int SelectedSkillUpped = Skills.getRealLevel(Skill.valueOf(_factory.getSkillCheck().get_skillDetails()[i].get_Name())) - _factory.getSkillCheck().get_skillDetails()[i].get_StartLevel();
             if(SelectedSkillUpped < SmallestIncrease){
                 CheckSkillDetails = _factory.getSkillCheck().get_skillDetails()[i];
             }

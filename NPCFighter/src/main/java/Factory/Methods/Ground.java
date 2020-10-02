@@ -2,6 +2,10 @@ package Factory.Methods;
 
 import Factory.Enums.InteractionCenter;
 import Factory.Factory;
+import org.dreambot.api.methods.container.impl.Inventory;
+import org.dreambot.api.methods.item.GroundItems;
+import org.dreambot.api.methods.walking.impl.Walking;
+
 import static Moduls.GrandExchangeApi.*;
 
 public class Ground {
@@ -11,34 +15,34 @@ public class Ground {
         _factory = factory;
     }
     public void BonesHandle(){
-        if(!_factory.getMain().getLocalPlayer().isInCombat()){
-            if(_factory.getMain().getInventory().isFull()){
+        if(!_factory.getMain().getLocalPlayer().isInCombat() && _factory.getMain().get_CombatVariables().get_WindowVariables().isBuryBones()){
+            if(Inventory.isFull()){
                 BuryBones();
+            }else{
+                TakeSelectedItem();
+                TakeBones();
             }
-        }else{
-           TakeBones();
-            TakeSelectedItem();
         }
     }
     public void TakeSelectedItem(){
-        for(int i = 0; i < _factory.getMain().getGroundItems().all().size(); i++){
+        for(int i = 0; i < GroundItems.all().size(); i++){
             //TakeList
             for(int j = 0; j < _factory.getMain().get_CombatVariables().get_WindowVariables().getPickUpItems().length; j++){
-                if(_factory.getMain().getGroundItems().all().get(i).toString().toUpperCase().equals(_factory.getMain().get_CombatVariables().get_WindowVariables().getPickUpItems()[j].toUpperCase())){
-                    _factory.getMain().getGroundItems().all().get(i).interact(InteractionCenter.Take.toString());
+                if(GroundItems.all().get(i).toString().toUpperCase().equals(_factory.getMain().get_CombatVariables().get_WindowVariables().getPickUpItems()[j].toUpperCase())){
+                    GroundItems.all().get(i).interact(InteractionCenter.Take.toString());
                     do{
                         _factory.getMain().sleep(100, 500);
-                    }while (_factory.getMain().getGroundItems().all().get(i) != null || _factory.getMain().getLocalPlayer().isMoving());
+                    }while (GroundItems.all().get(i) != null || _factory.getMain().getLocalPlayer().isMoving());
                 }
             }
             //TakeHightValueItem
-            for (int j = 0; j < _factory.getMain().getGroundItems().all().size(); j++){
-                GELookupResult lookupResult = _factory.getGrandExchangeApi().lookup(_factory.getMain().getGroundItems().all().get(j).getID());
+            for (int j = 0; j < GroundItems.all().size(); j++){
+                GELookupResult lookupResult = _factory.getGrandExchangeApi().lookup(GroundItems.all().get(j).getID());
                 if(lookupResult.price >= _factory.getMain().get_CombatVariables().get_WindowVariables().getPickupItemCost()){
-                    _factory.getMain().getGroundItems().all().get(i).interact(InteractionCenter.Take.toString());
+                    GroundItems.all().get(i).interact(InteractionCenter.Take.toString());
                     do{
                         _factory.getMain().sleep(100, 500);
-                    }while (_factory.getMain().getGroundItems().all().get(i) != null || _factory.getMain().getLocalPlayer().isMoving());
+                    }while (GroundItems.all().get(i) != null || _factory.getMain().getLocalPlayer().isMoving());
                 }
             }
         }
@@ -49,37 +53,37 @@ public class Ground {
         _factory.getInteractionUser().SetActivity("TakeBones");
         String groundItem = GroundcheckBones();
         if(groundItem.isEmpty()){
-            _factory.getMain().log(_factory.getMain().getGroundItems().all().get(_factory.getMain().getGroundItems().all().size()-1).toString());
+            _factory.getMain().log(GroundItems.all().get(GroundItems.all().size()-1).toString());
         }else{
             ClosesItem closesItems = new ClosesItem();
             closesItems.setCost(99);
-            for(int i = 0; i < _factory.getMain().getGroundItems().all(groundItem).size(); i++)
+            for(int i = 0; i < GroundItems.all(groundItem).size(); i++)
             {
-                if(closesItems.getCost() > _factory.getMain().getWalking().getAStarPathFinder().calculate(_factory.getMain().getLocalPlayer().getTile(),_factory.getMain().getGroundItems().all(groundItem).get(i).getTile()).size()) {
-                    closesItems.setCost(_factory.getMain().getWalking().getAStarPathFinder().calculate(_factory.getMain().getLocalPlayer().getTile(), _factory.getMain().getGroundItems().all(groundItem).get(i).getTile()).size());
+                if(closesItems.getCost() > Walking.getAStarPathFinder().calculate(_factory.getMain().getLocalPlayer().getTile(),GroundItems.all(groundItem).get(i).getTile()).size()) {
+                    closesItems.setCost(Walking.getAStarPathFinder().calculate(_factory.getMain().getLocalPlayer().getTile(), GroundItems.all(groundItem).get(i).getTile()).size());
                     closesItems.setIndex(i);
                 }
             }
-            _factory.getMain().getGroundItems().all(groundItem).get(closesItems.getIndex()).interact(InteractionCenter.Take.toString());
+            GroundItems.all(groundItem).get(closesItems.getIndex()).interact(InteractionCenter.Take.toString());
             do{
                 _factory.getMain().sleep(100, 500);
-            }while (_factory.getMain().getGroundItems().all().get(closesItems.getIndex()) != null || _factory.getMain().getLocalPlayer().isMoving());
+            }while (GroundItems.all().get(closesItems.getIndex()) != null || _factory.getMain().getLocalPlayer().isMoving());
         }
     }
     private void BuryBones(){
         _factory.getInteractionUser().SetActivity("Bury Bones");
-        while(_factory.getMain().getInventory().contains(CheckInvertory())){
-            if (_factory.getMain().getInventory().contains(CheckInvertory())){
-                _factory.getMain().getInventory().interact(CheckInvertory(), InteractionCenter.Bury.toString());
-                _factory.getInterfaceGraphics().setBurydBones(_factory.getInterfaceGraphics().getBurydBones() + 1);
+        while(Inventory.contains(CheckInvertory())){
+            if (Inventory.contains(CheckInvertory())){
+                Inventory.interact(CheckInvertory(), InteractionCenter.Bury.toString());
+                _factory.getInterfaceGraphics().setBuriedBones(_factory.getInterfaceGraphics().getBuriedBones() + 1);
                 _factory.getMain().sleep(800, 1300);
             }
         }
     }
     public String GroundcheckBones(){
         for(int i = 0; i < Bones.length; i++) {
-            for(int j = 0; j < _factory.getMain().getGroundItems().all().size(); j++){
-                if(_factory.getMain().getGroundItems().all().get(j).toString().equals(Bones[i])){
+            for(int j = 0; j < GroundItems.all().size(); j++){
+                if(GroundItems.all().get(j).toString().equals(Bones[i])){
                     return Bones[i];
                 }
             }
@@ -89,7 +93,7 @@ public class Ground {
     }
     public String CheckInvertory(){
         for(int i = 0; i < Bones.length; i++) {
-            if (_factory.getMain().getInventory().contains(Bones[i])){
+            if (Inventory.contains(Bones[i])){
                 return Bones[i];
             }
         }

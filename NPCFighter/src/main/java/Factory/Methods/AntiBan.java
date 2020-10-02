@@ -36,7 +36,8 @@ public class AntiBan {
             _factory.getMain().getMouse().isMouseInScreen();
         }
         if(chances > 350 && chances < 355){
-            _factory.getInterfaceWidgets().GetRandomInterfaceTab().interact();
+            //_factory.getInterfaceWidgets().GetRandomInterfaceTab().interact();
+            _factory.getMain().getTabs().openWithMouse(_factory.getInterfaceWidgets().getRandomTab());
             _factory.getInteractionUser().SetActivity("Anti-ban: Open Random tab");
             _factory.getMain().sleep(200, 500);
         }

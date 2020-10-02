@@ -2,10 +2,12 @@ package Factory;
 
 import Combat.Main;
 import Factory.Methods.*;
+import Factory.Paint.Buttons.Buttons;
 import Factory.Paint.InterfaceGraphics;
 import Moduls.DownloadData;
 import Moduls.GrandExchangeApi;
 import Moduls.Json;
+import Moduls.Time;
 
 public class Factory {
     private Main _main;
@@ -15,7 +17,7 @@ public class Factory {
     private SkillCheck _SC;
     private SelectedAttackTypeHandle _SATH;
     private DynamicCombat _DC;
-    private Combat _CB;
+    private Fight _CB;
     private Eat _EAT;
     private Json JSON;
     private InterfaceWidgets _IW;
@@ -28,7 +30,9 @@ public class Factory {
     private Banking Banking;
     private Ground ground;
     private InterfaceGraphics InterfaceGraphics;
-    private GrandExchangeApi grandExchangeApi;
+    private Time time;
+    private Arrow arrow;
+    private Buttons buttons;
     public Factory(Main main) {
         this._main = main;
         this._Npcs = new Npcs(this);
@@ -37,7 +41,7 @@ public class Factory {
         this._SC = new SkillCheck(this);
         this._DC = new DynamicCombat(this);
         this._SATH = new SelectedAttackTypeHandle(this);
-        this._CB = new Combat(this);
+        this._CB = new Fight(this);
         this._EAT = new Eat(this);
         this.JSON = new Json(this);
         this._DF = new DownloadData(this);
@@ -50,6 +54,9 @@ public class Factory {
         this.Banking = new Banking(this);
         this.ground = new Ground(this);
         this.InterfaceGraphics = new InterfaceGraphics(this);
+        this.time = new Time(this);
+        this.arrow = new Arrow(this);
+        this.buttons = new Buttons(this);
     }
 
     public Main getMain() {
@@ -79,7 +86,7 @@ public class Factory {
     public DynamicCombat getDynamicCombat(){
         return _DC;
     }
-    public Combat getCombat(){
+    public Fight getCombat(){
         return _CB;
     }
 
@@ -129,5 +136,17 @@ public class Factory {
 
     public GrandExchangeApi getGrandExchangeApi() {
         return new GrandExchangeApi(true);
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public Arrow getArrow() {
+        return arrow;
+    }
+
+    public Buttons getButtons() {
+        return buttons;
     }
 }

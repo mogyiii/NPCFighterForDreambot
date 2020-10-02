@@ -6,5 +6,6 @@ public enum InteractionCenter {
     Attack,
     Bank,
     Take,
-    Bury
+    Bury,
+    Equip
 }

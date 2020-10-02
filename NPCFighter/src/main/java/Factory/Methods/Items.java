@@ -1,6 +1,7 @@
 package Factory.Methods;
 
 import Factory.Factory;
+import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.wrappers.items.Item;
 
 import java.util.Collection;
@@ -15,8 +16,8 @@ public class Items {
         _factory = factory;
     }
     public void setStartedItems(){
-        for(int i = 0; i < _factory.getMain().getInventory().all().size() - 1; i++){
-            StartedItems[i] = _factory.getMain().getInventory().all().get(i);
+        for(int i = 0; i < Inventory.all().size() - 1; i++){
+            StartedItems[i] = Inventory.all().get(i);
         }
     }
 

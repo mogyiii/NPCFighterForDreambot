@@ -1,6 +1,7 @@
 package Factory.Methods;
 
 import Factory.Factory;
+import org.dreambot.api.methods.interactive.Players;
 import org.dreambot.api.wrappers.widgets.message.Message;
 
 import java.io.BufferedReader;
@@ -23,8 +24,8 @@ public class ChatBot {
         }
     }
     private boolean PlayerIsExist(String message){
-        for(int i = 0; i < _factory.getMain().getPlayers().all().size(); i++){
-            if(message.contains(_factory.getMain().getPlayers().all().get(i).getName())){
+        for(int i = 0; i < Players.all().size(); i++){
+            if(message.contains(Players.all().get(i).getName())){
                 return true;
             }
         }

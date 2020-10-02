@@ -9,22 +9,26 @@ import org.dreambot.api.script.ScriptManifest;
 import org.dreambot.api.wrappers.widgets.message.Message;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 
 @ScriptManifest(category = Category.COMBAT, name = "Mogy NPC Fighter", author = "Mogyiii", version = 1.0)
 public class Main extends AbstractScript {
 	private CombatVariables _CombatVariables;
 	private Factory _factory;
 	private boolean IsSaved = false;
+	private SetStart setStart;
 	@Override
 	public void onStart() {
 		super.onStart();
         this._CombatVariables = new CombatVariables(new Window(this));
         this._factory = new Factory(this);
+		this.setStart = new SetStart(this._factory);
 	}
 
 	@Override
 	public void onPaint(Graphics graphics) {
 		super.onPaint(graphics);
+		_factory.getInterfaceGraphics().Drawn(graphics);
 	}
 
 	@Override
@@ -54,7 +58,12 @@ public class Main extends AbstractScript {
 			}
 
 			_factory.getWalking().WalkingHandler();
+			if(_factory.getCombat().getSelectedEnemy() == null){
+				_factory.getGround().BonesHandle();
+				_factory.getArrow().ArrowHandler();
+			}
 			_factory.getSelectedAttackTypeHandle().SelectCombatType();
+			_factory.getArrow().EquipArrow();
 			_factory.getPotions().CheckCanDrinkPotion();
 			_factory.getEAT().Eating();
 			_factory.getAntiBan().RandomAntiBan();
@@ -77,7 +86,14 @@ public class Main extends AbstractScript {
         get_CombatVariables().get_window().setVisible(false);
     }
 
-    public CombatVariables get_CombatVariables() {
+	@Override
+	public void onMouse(MouseEvent event) {
+		super.onMouse(event);
+		_factory.getButtons().ButtonsHandle(event);
+
+	}
+
+	public CombatVariables get_CombatVariables() {
 		return _CombatVariables;
 	}
 

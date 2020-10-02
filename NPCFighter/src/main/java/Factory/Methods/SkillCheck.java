@@ -2,6 +2,7 @@ package Factory.Methods;
 
 import Factory.Factory;
 import org.dreambot.api.methods.skills.Skill;
+import org.dreambot.api.methods.skills.Skills;
 
 public class SkillCheck{
     private Factory _factory;
@@ -13,15 +14,15 @@ public class SkillCheck{
     }
     public void SkillCheckSelectType(){
         if(_factory.getMain().get_CombatVariables().get_WindowVariables().isUseAttack()){
-            _skillDetails[SkillCount] = new SkillDetails("Attack", _factory.getMain().getSkills().getRealLevel(Skill.ATTACK));
+            _skillDetails[SkillCount] = new SkillDetails("Attack", Skills.getRealLevel(Skill.ATTACK));
             SkillCount++;
         }
         if(_factory.getMain().get_CombatVariables().get_WindowVariables().isUseDefend()){
-            _skillDetails[SkillCount] = new SkillDetails("Defend", _factory.getMain().getSkills().getRealLevel(Skill.DEFENCE));
+            _skillDetails[SkillCount] = new SkillDetails("Defend", Skills.getRealLevel(Skill.DEFENCE));
             SkillCount++;
         }
         if(_factory.getMain().get_CombatVariables().get_WindowVariables().isUseStrength()){
-            _skillDetails[SkillCount] = new SkillDetails("Strength", _factory.getMain().getSkills().getRealLevel(Skill.STRENGTH));
+            _skillDetails[SkillCount] = new SkillDetails("Strength", Skills.getRealLevel(Skill.STRENGTH));
             SkillCount++;
         }
     }
