@@ -50,9 +50,10 @@ public class Main extends AbstractScript {
 	@Override
 	public int onLoop() {
 		if(get_CombatVariables().isStarted() && !_factory.getMain().getRandomManager().isSolving()){
-			if(!IsSaved){
+			if(!IsSaved && !_factory.getMain().getRandomManager().getWelcomeScreenSolver().shouldExecute()){
 				_factory.getItems().setStartedItems();
 				_factory.getBotArea().setStartedArea();
+				_factory.getBotArea().setWalkToArea(_factory.getBotArea().getStartedArea());
 				get_CombatVariables().get_window().setVisible(false);
 				IsSaved = true;
 			}
@@ -72,6 +73,7 @@ public class Main extends AbstractScript {
 			get_CombatVariables().get_window().setVisible(true);
 		}
 		return Calculations.random(300, 500);
+
 	}
 
     @Override
@@ -101,4 +103,7 @@ public class Main extends AbstractScript {
 		return _factory;
 	}
 
+	public boolean isSaved() {
+		return IsSaved;
+	}
 }

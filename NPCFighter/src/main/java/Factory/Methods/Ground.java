@@ -5,8 +5,9 @@ import Factory.Factory;
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.item.GroundItems;
 import org.dreambot.api.methods.walking.impl.Walking;
+import org.dreambot.api.wrappers.items.Item;
 
-import static Moduls.GrandExchangeApi.*;
+import static Moduls.GrandExchangeApi.GELookupResult;
 
 public class Ground {
     private Factory _factory;
@@ -16,7 +17,8 @@ public class Ground {
     }
     public void BonesHandle(){
         if(!_factory.getMain().getLocalPlayer().isInCombat() && _factory.getMain().get_CombatVariables().get_WindowVariables().isBuryBones()){
-            if(Inventory.isFull()){
+            Item item = Inventory.get(Item -> Item != null && Item.hasAction(InteractionCenter.Bury.toString()));
+            if(Inventory.isFull() && item != null){
                 BuryBones();
             }else{
                 TakeSelectedItem();

@@ -6,5 +6,6 @@ public enum DrawSkill {
     Strength,
     Magic,
     Prayer,
-    Ranged
+    Ranged,
+    Hitpoints
 }

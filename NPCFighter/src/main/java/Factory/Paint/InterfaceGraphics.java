@@ -14,7 +14,7 @@ import static java.lang.Math.toIntExact;
 public class InterfaceGraphics {
     private Factory _factory;
     private int BurieddBones = 0;
-    private Image BackgroundPaint = getImage("https://i.imgur.com/x28IfI6.png");
+    private Image BackgroundPaint = getImage("https://i.imgur.com/QB32DJT.png");
     private long FollowerTimeSecond;
     private int DotCounter = 0;
     private String Dot = "...";
@@ -41,31 +41,56 @@ public class InterfaceGraphics {
 
 
     public void Drawn(Graphics graphics){
-        graphics.drawImage(BackgroundPaint, 0, 0, null);
-        Font font = new Font("Franklin Gothic Medium", Font.PLAIN, 12);
+        Font font = new Font("Franklin Gothic Medium", Font.PLAIN, 15);
         graphics.setFont(font);
         graphics.setColor(new Color(255, 255, 255));
-        GeneralDraw(graphics);
+        if(!_factory.getButtons().isHide()){
+            graphics.drawImage(BackgroundPaint, 0, 0, null);
+            GeneralDraw(graphics);
+            SelectDraw(graphics);
+            HoverButtons(graphics);
+            if(!_factory.getButtons().isHide()){
+                _factory.getDebug().DebugHandle(graphics);
+            }
+        }else{
+            graphics.drawString("x", 597, 10);
+        }
+
+    }
+    private void SelectDraw(Graphics graphics){
         switch (getSelectedDrawSkill()){
             case Magic:
+                magicStatics.DrawMagic(graphics);
                 break;
             case Attack:
+                attackStatics.DrawAttack(graphics);
                 break;
             case Defend:
+                defendStatics.DrawDefend(graphics);
                 break;
             case Prayer:
                 prayerStatics.DrawPrayer(graphics);
                 break;
             case Ranged:
+                rangedStatics.DrawRanged(graphics);
                 break;
             case Strength:
+                strengthStatics.DrawStrength(graphics);
+                break;
+            case Hitpoints:
+                hitPointsStatics.DrawHitPoints(graphics);
                 break;
         }
-
+    }
+    private void HoverButtons(Graphics graphics){
+        graphics.drawRect((int)_factory.getButtons().getHoverBtn().getX(),
+                (int)_factory.getButtons().getHoverBtn().getY(),
+                (int)_factory.getButtons().getHoverBtn().getWidth(),
+                (int)_factory.getButtons().getHoverBtn().getHeight());
     }
     private void GeneralDraw(Graphics graphics){
-        graphics.drawString("Time running: " + _factory.getTime().eclapsedtime(_factory.getTime().getStartTime()), 10, 370);
-        graphics.drawString(_factory.getInteractionUser().getActivity() + dot(), 230, 472);
+        graphics.drawString("Time running: " + _factory.getTime().eclapsedtime(_factory.getTime().getStartTime()), 22, 51);
+        graphics.drawString(_factory.getInteractionUser().getActivity() + dot(), 22, 185);
     }
 
     private String dot(){
@@ -106,4 +131,5 @@ public class InterfaceGraphics {
     public void setSelectedDrawSkill(DrawSkill selectedDrawSkill) {
         this.selectedDrawSkill = selectedDrawSkill;
     }
+
 }

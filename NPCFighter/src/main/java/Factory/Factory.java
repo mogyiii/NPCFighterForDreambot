@@ -3,6 +3,7 @@ package Factory;
 import Combat.Main;
 import Factory.Methods.*;
 import Factory.Paint.Buttons.Buttons;
+import Factory.Paint.Debug;
 import Factory.Paint.InterfaceGraphics;
 import Moduls.DownloadData;
 import Moduls.GrandExchangeApi;
@@ -26,13 +27,14 @@ public class Factory {
     private Items Items;
     private DrinkPotions Potions;
     private BotArea BotArea;
-    private Walking Walking;
+    private Walks Walking;
     private Banking Banking;
     private Ground ground;
     private InterfaceGraphics InterfaceGraphics;
     private Time time;
     private Arrow arrow;
     private Buttons buttons;
+    private Debug Debug;
     public Factory(Main main) {
         this._main = main;
         this._Npcs = new Npcs(this);
@@ -50,13 +52,15 @@ public class Factory {
         this.Items = new Items(this);
         this.Potions = new DrinkPotions(this);
         this.BotArea = new BotArea(this);
-        this.Walking = new Walking(this);
+        this.Walking = new Walks(this);
         this.Banking = new Banking(this);
         this.ground = new Ground(this);
         this.InterfaceGraphics = new InterfaceGraphics(this);
         this.time = new Time(this);
         this.arrow = new Arrow(this);
         this.buttons = new Buttons(this);
+        this.Debug = new Debug(this);
+
     }
 
     public Main getMain() {
@@ -119,7 +123,7 @@ public class Factory {
     public BotArea getBotArea() {
         return BotArea;
     }
-    public Walking getWalking(){
+    public Walks getWalking(){
         return Walking;
     }
 
@@ -148,5 +152,9 @@ public class Factory {
 
     public Buttons getButtons() {
         return buttons;
+    }
+
+    public Debug getDebug() {
+        return Debug;
     }
 }
