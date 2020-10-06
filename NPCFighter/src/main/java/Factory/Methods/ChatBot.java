@@ -1,6 +1,7 @@
 package Factory.Methods;
 
 import Factory.Factory;
+import org.dreambot.api.methods.input.Keyboard;
 import org.dreambot.api.methods.interactive.Players;
 import org.dreambot.api.wrappers.widgets.message.Message;
 
@@ -19,7 +20,8 @@ public class ChatBot {
     public void Answer(Message message){
         if(_factory.getMain().get_CombatVariables().get_WindowVariables().isUseChatBot()){
             if(PlayerIsExist(message.getUsername()) && !(message.getUsername().equals(_factory.getMain().getLocalPlayer().getName()))){
-                _factory.getMain().getKeyboard().type(ResponseCutter(SendPostMessage(message.getMessage())));
+                _factory.getInteractionUser().SetActivity("Keyboard typing...");
+                Keyboard.type(ResponseCutter(SendPostMessage(message.getMessage())));
             }
         }
     }

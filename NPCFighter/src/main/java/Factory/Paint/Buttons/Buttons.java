@@ -10,6 +10,7 @@ public class Buttons {
     private Factory _factory;
     public Buttons(Factory factory) {
         this._factory = factory;
+        _factory.getInterfaceGraphics().setSelectedDrawSkill(DrawSkill.Hitpoints);
     }
     //Close/Open
     Point p;
@@ -56,8 +57,8 @@ public class Buttons {
         }
     }
     public void HoverButtons(MouseEvent event){
-        Point pointHover = event.getLocationOnScreen();
-        _factory.getMain().log(pointHover.toString());
+        Point pointHover = new Point();
+        pointHover.setLocation(event.getX(), event.getY());
         if (close.contains(pointHover)) {
             HoverBtn = close;
         }else if (DebugBTN.contains(pointHover)) {

@@ -32,6 +32,7 @@ public class SelectedAttackTypeHandle {
     }
     private void Range(){
         if(ChoseSkill() != null){
+            _factory.getInteractionUser().SetActivity("Select combat type");
             Tabs.openWithMouse(Tab.COMBAT);
             if(ChoseSkill().get_Name().equals("Defend")){
                 _factory.getDynamicCombat().getRangeWithDefend().interact();
@@ -44,6 +45,7 @@ public class SelectedAttackTypeHandle {
     private void Magic(){
         if(ChoseSkill() != null){
             Tabs.openWithMouse(Tab.COMBAT);
+            _factory.getInteractionUser().SetActivity("Select combat type");
             if(ChoseSkill().get_Name().equals("Defend") && EquipmentSlot.WEAPON.toString().contains("Staff")){
                 _factory.getDynamicCombat().getSpellWithStaffDefend().interact();
                 _factory.getDynamicCombat().getCombatMenuAltMenuSpellList().interact();
@@ -62,6 +64,7 @@ public class SelectedAttackTypeHandle {
     }
     private void Melee(){
         if(ChoseSkill() != null){
+            _factory.getInteractionUser().SetActivity("Select combat type");
             Tabs.openWithMouse(Tab.COMBAT);
             if(ChoseSkill().get_Name().equals("Attack")){
                 _factory.getDynamicCombat().getMeleeAttack().interact();

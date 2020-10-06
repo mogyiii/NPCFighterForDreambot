@@ -1,0 +1,262 @@
+[
+    {
+      "Spell": "Wind Strike",
+      "Magic Level": 1,
+      "Members only": "No",
+      "Runes Required": "1           1",
+      "Experience": 5.5,
+      "Base Max hit": "2",
+      "Casting cost": 8,
+      "Notes": "Members wishing to kill Salarin the twisted will have to use this or any other Strike spell, as only strike spells can damage him; no other form of magic has an effect."
+    },
+    {
+      "Spell": "Water Strike",
+      "Magic Level": 5,
+      "Members only": "No",
+      "Runes Required": "1   1        1",
+      "Experience": 7.5,
+      "Base Max hit": "4",
+      "Casting cost": 13,
+      "Notes": "Members wishing to kill Salarin the twisted will have to use this or any other Strike spell, as only strike spells can damage him; no other form of magic has an effect."
+    },
+    {
+      "Spell": "Earth Strike",
+      "Magic Level": 9,
+      "Members only": "No",
+      "Runes Required": "1 2          1",
+      "Experience": 9.5,
+      "Base Max hit": "6",
+      "Casting cost": 18,
+      "Notes": "Members wishing to kill Salarin the twisted will have to use this or any other Strike spell, as only strike spells can damage him; no other form of magic has an effect."
+    },
+    {
+      "Spell": "Fire Strike",
+      "Magic Level": 13,
+      "Members only": "No",
+      "Runes Required": "2  3         1",
+      "Experience": 11.5,
+      "Base Max hit": "8",
+      "Casting cost": 23,
+      "Notes": "Members wishing to kill Salarin the twisted will have to use this or any other Strike spell, as only strike spells can damage him; no other form of magic has an effect."
+    },
+    {
+      "Spell": "Wind Bolt",
+      "Magic Level": 17,
+      "Members only": "No",
+      "Runes Required": "2       1",
+      "Experience": 13.5,
+      "Base Max hit": "9",
+      "Casting cost": 73,
+      "Notes": "Can hit a maximum of 12 after Family Crest if the player chooses to wear the Chaos gauntlets."
+    },
+    {
+      "Spell": "Water Bolt",
+      "Magic Level": 23,
+      "Members only": "No",
+      "Runes Required": "2   2    1",
+      "Experience": 16.5,
+      "Base Max hit": "10",
+      "Casting cost": 83,
+      "Notes": "Can hit a maximum of 13 after Family Crest if the player chooses to wear the Chaos gauntlets."
+    },
+    {
+      "Spell": "Earth Bolt",
+      "Magic Level": 29,
+      "Members only": "No",
+      "Runes Required": "2 3      1",
+      "Experience": 19.5,
+      "Base Max hit": "11",
+      "Casting cost": 88,
+      "Notes": "Can hit a maximum of 14 after Family Crest if the player chooses to wear the Chaos gauntlets."
+    },
+    {
+      "Spell": "Fire Bolt",
+      "Magic Level": 35,
+      "Members only": "No",
+      "Runes Required": "3  4     1",
+      "Experience": 22.5,
+      "Base Max hit": "12",
+      "Casting cost": 98,
+      "Notes": "Can hit a maximum of 15 after Family Crest if the player chooses to wear the Chaos gauntlets."
+    },
+    {
+      "Spell": "Crumble Undead",
+      "Magic Level": 39,
+      "Members only": "No",
+      "Runes Required": "2 2      1",
+      "Experience": 24.5,
+      "Base Max hit": "15",
+      "Casting cost": 83,
+      "Notes": "Will only work on undead i.e. Zombies, Skeletons, etc. Can only be autocast with the Slayer's staff, Void Knight mace or any variation of the Staff of the dead."
+    },
+    {
+      "Spell": "Wind Blast",
+      "Magic Level": 41,
+      "Members only": "No",
+      "Runes Required": "3         1",
+      "Experience": 25.5,
+      "Base Max hit": "13",
+      "Casting cost": 209,
+      "Notes": "Used to kill Chronozon during the Family Crest quest."
+    },
+    {
+      "Spell": "Water Blast",
+      "Magic Level": 47,
+      "Members only": "No",
+      "Runes Required": "3   3      1",
+      "Experience": 28.5,
+      "Base Max hit": "14",
+      "Casting cost": 224,
+      "Notes": "Used to kill Chronozon during the Family Crest quest."
+    },
+    {
+      "Spell": "Iban Blast",
+      "Magic Level": 50,
+      "Members only": "Yes",
+      "Runes Required": "5       1            +",
+      "Experience": 30,
+      "Base Max hit": "25",
+      "Casting cost": 219,
+      "Notes": "Must complete Underground Pass quest, the regular staff has 120 charges, but the upgraded one has 2,500 charges. Using Iban Blast on any NPC will use one charge. Using the spell on a player will use 2 charges. When all the charges are used up, you have to recharge the staff by using it on the well in the Underground Pass, past the three paladins, or pay the dark mage to repair it for you. The casting cost does not include the value of a charge."
+    },
+    {
+      "Spell": "Magic Dart",
+      "Magic Level": 50,
+      "Members only": "Yes",
+      "Runes Required": "1  4          +  /  /  /  /",
+      "Experience": 30,
+      "Base Max hit": "15-30",
+      "Casting cost": 206,
+      "Notes": "Must have level 55 Slayer to use. Requires Slayer's staff or any variation of the Staff of the dead. A Slayer staff (e) must be used to hit 30+"
+    },
+    {
+      "Spell": "Earth Blast",
+      "Magic Level": 53,
+      "Members only": "No",
+      "Runes Required": "3 4        1",
+      "Experience": 31.5,
+      "Base Max hit": "15",
+      "Casting cost": 229,
+      "Notes": "Used to kill Chronozon during the Family Crest quest."
+    },
+    {
+      "Spell": "Fire Blast",
+      "Magic Level": 59,
+      "Members only": "No",
+      "Runes Required": "4  5       1",
+      "Experience": 34.5,
+      "Base Max hit": "16",
+      "Casting cost": 239,
+      "Notes": "The best combat spell for free players. Used to kill Chronozon during the Family Crest quest."
+    },
+    {
+      "Spell": "Saradomin Strike",
+      "Magic Level": 60,
+      "Members only": "Yes",
+      "Runes Required": "4  2   2                +  /",
+      "Experience": 61,
+      "Base Max hit": "20 / 30",
+      "Casting cost": 838,
+      "Notes": "See Charge, and Mage Arena guide. Can only be autocast by a Staff of light."
+    },
+    {
+      "Spell": "Claws of Guthix",
+      "Magic Level": 60,
+      "Members only": "Yes",
+      "Runes Required": "4  1   2                +  /  /",
+      "Experience": 61,
+      "Base Max hit": "20 / 30",
+      "Casting cost": 833,
+      "Notes": "See Charge, and Mage Arena guide. Can only be autocast by a Void Knight Mace or a Staff of balance."
+    },
+    {
+      "Spell": "Flames of Zamorak",
+      "Magic Level": 60,
+      "Members only": "Yes",
+      "Runes Required": "1  4   2                +  /  /",
+      "Experience": 61,
+      "Base Max hit": "20 / 30",
+      "Casting cost": 833,
+      "Notes": "See Charge, and Mage Arena guide. Can only be autocast by a Staff of the dead or Toxic staff of the dead ."
+    },
+    {
+      "Spell": "Wind Wave",
+      "Magic Level": 62,
+      "Members only": "Yes",
+      "Runes Required": "5     1",
+      "Experience": 36,
+      "Base Max hit": "17",
+      "Casting cost": 429,
+      "Notes": "High level elemental spell."
+    },
+    {
+      "Spell": "Water Wave",
+      "Magic Level": 65,
+      "Members only": "Yes",
+      "Runes Required": "5   7  1",
+      "Experience": 37.5,
+      "Base Max hit": "18",
+      "Casting cost": 464,
+      "Notes": "High level elemental spell."
+    },
+    {
+      "Spell": "Earth Wave",
+      "Magic Level": 70,
+      "Members only": "Yes",
+      "Runes Required": "5 7    1",
+      "Experience": 40,
+      "Base Max hit": "19",
+      "Casting cost": 464,
+      "Notes": "High level elemental spell."
+    },
+    {
+      "Spell": "Fire Wave",
+      "Magic Level": 75,
+      "Members only": "Yes",
+      "Runes Required": "5  7   1",
+      "Experience": 42.5,
+      "Base Max hit": "20",
+      "Casting cost": 464,
+      "Notes": "High level elemental spell."
+    },
+    {
+      "Spell": "Wind Surge",
+      "Magic Level": 81,
+      "Members only": "Yes",
+      "Runes Required": "7              1",
+      "Experience": 44.5,
+      "Base Max hit": "21",
+      "Casting cost": 432,
+      "Notes": "High level elemental spell."
+    },
+    {
+      "Spell": "Water Surge",
+      "Magic Level": 85,
+      "Members only": "Yes",
+      "Runes Required": "7   10           1",
+      "Experience": 46.5,
+      "Base Max hit": "22",
+      "Casting cost": 482,
+      "Notes": "High level elemental spell."
+    },
+    {
+      "Spell": "Earth Surge",
+      "Magic Level": 90,
+      "Members only": "Yes",
+      "Runes Required": "7 10             1",
+      "Experience": 48.5,
+      "Base Max hit": "23",
+      "Casting cost": 482,
+      "Notes": "High level elemental spell."
+    },
+    {
+      "Spell": "Fire Surge",
+      "Magic Level": 95,
+      "Members only": "Yes",
+      "Runes Required": "7  10            1",
+      "Experience": 50.5,
+      "Base Max hit": "24",
+      "Casting cost": 482,
+      "Notes": "Best elemental spell."
+    }
+]

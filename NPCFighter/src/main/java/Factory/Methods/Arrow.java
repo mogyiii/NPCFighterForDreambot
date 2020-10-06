@@ -19,6 +19,7 @@ public class Arrow {
         }
     }
     private void TakeArrows(){
+        _factory.getInteractionUser().SetActivity("Take Arrows");
         for (int i = 0; i < _factory.getMain().getGroundItems().all().size(); i++){
             if(GroundItems.all().get(i).getName().toUpperCase().contains("ARROW")) {
                 GroundItems.all().get(i).interact(InteractionCenter.Take.toString());
@@ -29,11 +30,15 @@ public class Arrow {
         }
     }
     public void EquipArrow(){
-        Item arrow = Inventory.get(item -> item.getName().equals(EquipmentSlot.ARROWS.name()) && EquipmentSlot.ARROWS != null);
-        if(arrow != null){
-            arrow.interact(InteractionCenter.Equip.toString());
+        Item arrow;
+        if(EquipmentSlot.ARROWS != null){
+            arrow = Inventory.get(item -> item != null && item.getName().equals(EquipmentSlot.ARROWS.name()));
         }else{
-            Inventory.get(item -> item.getName().toUpperCase().contains("ARROW") && item != null).interact(InteractionCenter.Equip.toString());
+            arrow = Inventory.get(item -> item.getName().toUpperCase().contains("ARROW") && item != null);
+        }
+        if(arrow != null ){
+            _factory.getInteractionUser().SetActivity("Equip arrow");
+            arrow.interact(InteractionCenter.Equip.toString());
         }
     }
 }

@@ -26,7 +26,7 @@ public class InterfaceGraphics {
     private StrengthStatics strengthStatics;
     private DrawSkill selectedDrawSkill;
     private HitPointsStatics hitPointsStatics;
-    private ThreeD threeD;
+
     public InterfaceGraphics(Factory factory) {
         _factory = factory;
         attackStatics = new AttackStatics(factory);
@@ -36,7 +36,7 @@ public class InterfaceGraphics {
         rangedStatics = new RangedStatics(factory);
         strengthStatics = new StrengthStatics(factory);
         hitPointsStatics = new HitPointsStatics(factory);
-        threeD = new ThreeD(factory);
+
     }
 
 
@@ -46,12 +46,13 @@ public class InterfaceGraphics {
         graphics.setColor(new Color(255, 255, 255));
         if(!_factory.getButtons().isHide()){
             graphics.drawImage(BackgroundPaint, 0, 0, null);
-            GeneralDraw(graphics);
-            SelectDraw(graphics);
-            HoverButtons(graphics);
             if(!_factory.getButtons().isHide()){
                 _factory.getDebug().DebugHandle(graphics);
             }
+            GeneralDraw(graphics);
+            SelectDraw(graphics);
+            HoverButtons(graphics);
+
         }else{
             graphics.drawString("x", 597, 10);
         }

@@ -12,8 +12,7 @@ import java.util.regex.Pattern;
  * Utility class for access to the Grand Exchange API.
  */
 public class GrandExchangeApi {
-    private static final String API_LOCATION = "http://services.runescape.com/m=itemdb_oldschool" +
-            "/api/catalogue/detail.json?item=%d";
+    private static final String API_LOCATION = "https://services.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item=";
     private static final long TEN_MINUTES = 600000;
     private final Map<Integer, GELookupResult> cache;
     private long startTime;
@@ -63,13 +62,14 @@ public class GrandExchangeApi {
 
         String json;
         try {
-            URL url = new URL(String.format(API_LOCATION, itemId));
-            Scanner scan = new Scanner(url.openStream()).useDelimiter("\\A");
+            URL url = new URL(API_LOCATION + itemId);
+            Scanner scan = new Scanner(url.openStream());
             json = scan.next();
             scan.close();
         } catch(IOException e) {
             return null;
         }
+
 
         GELookupResult result = parse(itemId, json);
 

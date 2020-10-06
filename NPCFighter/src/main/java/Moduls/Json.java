@@ -16,11 +16,9 @@ public class Json {
     public String getJson(String JsonPath){
         BufferedReader reader = null;
         String line = null;
-        try {
-            reader = new BufferedReader(new InputStreamReader(this.getClass().getResource(JsonPath).openStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        reader = new BufferedReader(new InputStreamReader(getClass().getClassLoader()
+                .getResourceAsStream(JsonPath)));
         StringBuilder content = new StringBuilder();
 
 
@@ -37,6 +35,7 @@ public class Json {
         return content.toString();
 
     }
+
     public Gson GetNewGson(){
         return new Gson();
     }

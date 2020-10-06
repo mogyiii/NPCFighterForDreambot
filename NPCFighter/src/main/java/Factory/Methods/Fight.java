@@ -16,16 +16,19 @@ public class Fight {
     public void Fight(){
         if(Combat.isSpecialActive() && _factory.getMain().get_CombatVariables().get_WindowVariables().isUseSpecialAttack()){
             Combat.toggleSpecialAttack(true);
+            _factory.getInteractionUser().SetActivity("Toggle Special attack");
         }
         if(!_factory.getMain().getLocalPlayer().isInCombat()){
+            _factory.getInteractionUser().SetActivity("Search Npcs");
             for(int i = 0; i < _factory.getMain().get_CombatVariables().get_WindowVariables().getSelectedList().length; i++){
                 for(int j = 0; j < NPCs.all(_factory.getMain().get_CombatVariables().get_WindowVariables().getSelectedList()[i]).size(); j++){
-
-                    if((!NPCs.all(_factory.getMain().get_CombatVariables().get_WindowVariables().getSelectedList()[i]).get(j).isInCombat()
+                    NPC ScannEnemy = NPCs.all(_factory.getMain().get_CombatVariables().get_WindowVariables().getSelectedList()[i]).get(j);
+                    if((!ScannEnemy.isInCombat()
                             ||
                             Combat.isInMultiCombat())
-                            && NPCs.all(_factory.getMain().get_CombatVariables().get_WindowVariables().getSelectedList()[i]).get(j).canAttack()
-                            && NPCs.all(_factory.getMain().get_CombatVariables().get_WindowVariables().getSelectedList()[i]).get(j) != null){
+                            && ScannEnemy.canAttack()
+                            && ScannEnemy != null
+                            && _factory.getBotArea().getWalkToArea().contains(ScannEnemy.getTile()) ){
 
                         if(SelectedEnemy == null || Walking.getAStarPathFinder().calculate(
                                 _factory.getMain().getLocalPlayer().getTile(),
@@ -33,15 +36,19 @@ public class Fight {
                                 >
                                 Walking.getAStarPathFinder().calculate(
                                         _factory.getMain().getLocalPlayer().getTile(),
-                                        NPCs.all(
-                                                _factory.getMain().get_CombatVariables().get_WindowVariables().getSelectedList()[i]).get(j).getTile()).size()){
-                            SelectedEnemy = NPCs.all(_factory.getMain().get_CombatVariables().get_WindowVariables().getSelectedList()[i]).get(j);
+                                        ScannEnemy.getTile()).size()){
+                            SelectedEnemy = ScannEnemy;
                         }
                     }
-
                 }
             }
-            SelectedEnemy.interact(InteractionCenter.Attack.toString());
+            if(SelectedEnemy.getHealthPercent() >= 1){
+                SelectedEnemy.interact(InteractionCenter.Attack.toString());
+            }else{
+                SelectedEnemy = null;
+            }
+        }else{
+            _factory.getInteractionUser().SetActivity("Fighting!");
         }
     }
 

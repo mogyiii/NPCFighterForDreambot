@@ -5,10 +5,7 @@ import Factory.Methods.*;
 import Factory.Paint.Buttons.Buttons;
 import Factory.Paint.Debug;
 import Factory.Paint.InterfaceGraphics;
-import Moduls.DownloadData;
-import Moduls.GrandExchangeApi;
-import Moduls.Json;
-import Moduls.Time;
+import Moduls.*;
 
 public class Factory {
     private Main _main;
@@ -139,7 +136,7 @@ public class Factory {
     }
 
     public GrandExchangeApi getGrandExchangeApi() {
-        return new GrandExchangeApi(true);
+        return new GrandExchangeApi();
     }
 
     public Time getTime() {
