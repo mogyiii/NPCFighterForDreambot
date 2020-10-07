@@ -5,6 +5,7 @@ import Factory.Factory;
 public class Time {
     private Factory _factory;
     private long startTime;
+    private long ActionTime = 0;
     public Time(Factory factory) {
         _factory = factory;
     }
@@ -27,5 +28,13 @@ public class Time {
         long elapsed;
         elapsed = ((System.currentTimeMillis() - startTime) / 1000);
         return elapsed;
+    }
+
+    public long getActionTime() {
+        return ActionTime;
+    }
+
+    public void setActionTime(long actionTime) {
+        ActionTime = actionTime;
     }
 }

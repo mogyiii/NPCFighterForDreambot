@@ -6,6 +6,7 @@ import Factory.Models.FoodsModel;
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.skills.Skill;
 import org.dreambot.api.methods.skills.Skills;
+import org.dreambot.api.wrappers.items.Item;
 
 public class Eat {
     private Factory _factory;
@@ -14,12 +15,14 @@ public class Eat {
     }
     public void Eating(){
         try{
-            if(Inventory.get(getEdibleFoodFromInvertory()).interact(InteractionCenter.Eat.toString())){
+            Item Food = Inventory.get(getEdibleFoodFromInvertory());
+            if(Food != null){
+                Food.interact(InteractionCenter.Eat.toString());
                 _factory.getInteractionUser().SetActivity("Eating...");
             }
         }catch (Exception e){
             _factory.getMain().log("Food error: " + e.toString());
-
+            NotRecognizableFood();
         }
     }
     public String getEdibleFoodFromInvertory(){
@@ -33,5 +36,10 @@ public class Eat {
     }
     private int getMissingHitpoints(){
         return Skills.getRealLevel(Skill.HITPOINTS) + Skills.getBoostedLevels(Skill.HITPOINTS);
+    }
+    private void NotRecognizableFood(){
+        if(_factory.getMain().getLocalPlayer().getHealthPercent() > 30){
+            Inventory.get(Item -> Item != null && Item.hasAction(InteractionCenter.Eat.toString())).hasAction(InteractionCenter.Eat.toString());
+        }
     }
 }

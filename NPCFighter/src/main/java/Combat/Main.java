@@ -52,6 +52,7 @@ public class Main extends AbstractScript {
 		if(get_CombatVariables().isStarted() && !_factory.getMain().getRandomManager().isSolving()){
 			if(!IsSaved && !_factory.getMain().getRandomManager().getWelcomeScreenSolver().shouldExecute()){
 				_factory.getItems().setStartedItems();
+				_factory.getItems().setEquipItems();
 				_factory.getBotArea().setStartedArea();
 				_factory.getBotArea().setWalkToArea(_factory.getBotArea().getStartedArea());
 				get_CombatVariables().get_window().setVisible(false);

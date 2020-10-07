@@ -32,6 +32,7 @@ public class Factory {
     private Arrow arrow;
     private Buttons buttons;
     private Debug Debug;
+    private GrandExchangeApi grandExchangeApi;
     public Factory(Main main) {
         this._main = main;
         this._Npcs = new Npcs(this);
@@ -57,7 +58,7 @@ public class Factory {
         this.arrow = new Arrow(this);
         this.buttons = new Buttons(this);
         this.Debug = new Debug(this);
-
+        this.grandExchangeApi = new GrandExchangeApi(true);
     }
 
     public Main getMain() {
@@ -136,7 +137,7 @@ public class Factory {
     }
 
     public GrandExchangeApi getGrandExchangeApi() {
-        return new GrandExchangeApi();
+        return grandExchangeApi;
     }
 
     public Time getTime() {

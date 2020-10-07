@@ -41,14 +41,15 @@ public class InterfaceGraphics {
 
 
     public void Drawn(Graphics graphics){
-        Font font = new Font("Franklin Gothic Medium", Font.PLAIN, 15);
-        graphics.setFont(font);
-        graphics.setColor(new Color(255, 255, 255));
+
         if(!_factory.getButtons().isHide()){
             graphics.drawImage(BackgroundPaint, 0, 0, null);
             if(!_factory.getButtons().isHide()){
                 _factory.getDebug().DebugHandle(graphics);
             }
+            Font font = new Font("Franklin Gothic Medium", Font.PLAIN, 15);
+            graphics.setFont(font);
+            graphics.setColor(new Color(255, 255, 255));
             GeneralDraw(graphics);
             SelectDraw(graphics);
             HoverButtons(graphics);

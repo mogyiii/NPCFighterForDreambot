@@ -31,7 +31,7 @@ public class Arrow {
     }
     public void EquipArrow(){
         Item arrow;
-        if(EquipmentSlot.ARROWS != null){
+        if(EquipmentSlot.ARROWS  != null){
             arrow = Inventory.get(item -> item != null && item.getName().equals(EquipmentSlot.ARROWS.name()));
         }else{
             arrow = Inventory.get(item -> item.getName().toUpperCase().contains("ARROW") && item != null);

@@ -38,11 +38,12 @@ public class Ground {
 
                     if(_factory.getBotArea().getWalkToArea().contains(scannedItem.getTile())){
                         do{
-                            if(!_factory.getMain().getLocalPlayer().isMoving()){
-                                scannedItem.interact(InteractionCenter.Take.toString());
+                            if(BreakWhile()){
+                                break;
                             }
                             _factory.getMain().sleep(100, 500);
                         }while (scannedItem != null || _factory.getMain().getLocalPlayer().isMoving());
+                        _factory.getTime().setActionTime(0);
                     }
                 }
             }
@@ -50,18 +51,22 @@ public class Ground {
         //TakeHightValueItem
         for (int j = 0; j < GroundItems.all().size(); j++){
             GroundItem scannedItem = GroundItems.all().get(j);
-            _factory.getMain().log("Size: " + GroundItems.all().size() + " Name: " + scannedItem.getName() + " ID: " + scannedItem.getID());
-            GELookupResult lookupResult = _factory.getGrandExchangeApi().lookup(scannedItem.getID());
-            if(lookupResult.price >= _factory.getMain().get_CombatVariables().get_WindowVariables().getPickupItemCost() && lookupResult != null){
-                if(_factory.getBotArea().getWalkToArea().contains(scannedItem.getTile())){
-                    do{
-                        if(!_factory.getMain().getLocalPlayer().isMoving()){
-                            scannedItem.interact(InteractionCenter.Take.toString());
-                        }
-                        _factory.getMain().sleep(100, 500);
-                    }while (scannedItem != null || _factory.getMain().getLocalPlayer().isMoving());
+            //_factory.getMain().log("Size: " + GroundItems.all().size() + " Name: " + scannedItem.getName() + " ID: " + scannedItem.getID());
+            if(scannedItem.getID() != 995){
+                GELookupResult lookupResult = _factory.getGrandExchangeApi().lookup(scannedItem.getID());
+                if(lookupResult.price >= _factory.getMain().get_CombatVariables().get_WindowVariables().getPickupItemCost() && lookupResult != null){
+                    if(_factory.getBotArea().getWalkToArea().contains(scannedItem.getTile())){
+                        do{
+                            if(BreakWhile()){
+                                break;
+                            }
+                            _factory.getMain().sleep(100, 500);
+                        }while (scannedItem != null || _factory.getMain().getLocalPlayer().isMoving());
+                        _factory.getTime().setActionTime(0);
+                    }
                 }
             }
+
         }
     }
 
@@ -81,17 +86,27 @@ public class Ground {
                 if(closesItems.getCost() > Walking.getAStarPathFinder().calculate(_factory.getMain().getLocalPlayer().getTile(),scannedItem.getTile()).size() && _factory.getBotArea().getWalkToArea().contains(scannedItem.getTile())) {
                     closesItems.setCost(Walking.getAStarPathFinder().calculate(_factory.getMain().getLocalPlayer().getTile(), scannedItem.getTile()).size());
                     closesItems.setIndex(i);
+                    closesItems.setSelectedItem(scannedItem);
                 }
             }
             if(closesItems.getIndex() != -1){
                 do {
-                    if(!_factory.getMain().getLocalPlayer().isMoving()){
-                        GroundItems.all(groundItem).get(closesItems.getIndex()).interact(InteractionCenter.Take.toString());
+                    if(BreakWhile()){
+                        break;
                     }
                     _factory.getMain().sleep(100, 500);
-                } while (GroundItems.all(groundItem).get(closesItems.getIndex()) != null || _factory.getMain().getLocalPlayer().isMoving());
+                } while (closesItems.getSelectedItem() != null || _factory.getMain().getLocalPlayer().isMoving());
+                _factory.getTime().setActionTime(0);
             }
         }
+    }
+    private boolean BreakWhile(){
+        if(_factory.getTime().eclapsedsec(_factory.getTime().getActionTime()) == 0){
+            _factory.getTime().setActionTime(System.currentTimeMillis());
+        }else if(_factory.getTime().eclapsedsec(_factory.getTime().getActionTime()) > 30){
+            return true;
+        }
+        return false;
     }
     private void BuryBones(){
         _factory.getInteractionUser().SetActivity("Bury Bones");

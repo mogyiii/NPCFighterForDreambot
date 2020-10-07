@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  */
 public class GrandExchangeApi {
     private static final String API_LOCATION = "https://services.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item=";
-    private static final long TEN_MINUTES = 600000;
+    private static final long Third_MINUTES = 18000000;
     private final Map<Integer, GELookupResult> cache;
     private long startTime;
 
@@ -48,13 +48,14 @@ public class GrandExchangeApi {
      * @return the result returned by the api. May be null if an error has occurred.
      */
     public GELookupResult lookup(int itemId) {
-        if((System.currentTimeMillis() - TEN_MINUTES) > startTime){ //Flush cache after 10 minutes. Auto-update prices.
+        GELookupResult result;
+        if((System.currentTimeMillis() - Third_MINUTES) > startTime){ //Flush cache after 10 minutes. Auto-update prices.
             flushCache();
             startTime = System.currentTimeMillis();
         }
 
         if(cache != null && !cache.isEmpty()) {
-            GELookupResult result = cache.get(itemId);
+            result = cache.get(itemId);
             if(result != null) {
                 return result;
             }
@@ -71,7 +72,7 @@ public class GrandExchangeApi {
         }
 
 
-        GELookupResult result = parse(itemId, json);
+        result = parse(itemId, json);
 
         if(cache != null) {
             cache.put(itemId, result);

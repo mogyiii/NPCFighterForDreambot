@@ -9,10 +9,9 @@ import java.awt.*;
 
 public class Debug {
     private Factory _factory;
-    private ThreeD threeD;
     public Debug(Factory factory) {
         _factory = factory;
-        threeD = new ThreeD(factory);
+
     }
     public void DebugHandle(Graphics graphics){
         MapDrawStartedArea(graphics);
@@ -26,8 +25,21 @@ public class Debug {
                     graphics.drawRect((int) Map.tileToMiniMap(currentareatiles[i]).getX(), (int) Map.tileToMiniMap(currentareatiles[i]).getY(), 2, 2);
                 }
             }
+            graphics.setColor(Color.RED);
             NPC SelectedNpc = _factory.getCombat().getSelectedEnemy();
-            graphics.drawRect(new Rectangle(SelectedNpc.getLocalX(), SelectedNpc.getLocalY(),SelectedNpc.));
+            Font font = new Font("Franklin Gothic Medium", Font.PLAIN, 10);
+            graphics.setFont(font);
+            if(SelectedNpc.isOnScreen()){
+                graphics.drawRect((int)SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().getX(),
+                        (int)SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().getY(),
+                        SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().width,
+                        SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().height);
+                graphics.drawString("Name: " + SelectedNpc.getName(), (int)SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().getX() + SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().width + 5, (int)SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().getY());
+                graphics.drawString("Level: " + SelectedNpc.getLevel(), (int)SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().getX() + SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().width + 5, (int)SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().getY() + 15);
+                graphics.drawString("ID: " + SelectedNpc.getID(), (int)SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().getX() + SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().width + 5, (int)SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().getY() + 30);
+            }
+
+            //graphics.drawRoundRect(150, 150,50,50,50,50);
         }
     }
 }
