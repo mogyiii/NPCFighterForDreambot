@@ -3,6 +3,7 @@ package Factory.Methods;
 import Factory.Enums.InteractionCenter;
 import Factory.Factory;
 import org.dreambot.api.methods.container.impl.Inventory;
+import org.dreambot.api.methods.container.impl.equipment.Equipment;
 import org.dreambot.api.methods.container.impl.equipment.EquipmentSlot;
 import org.dreambot.api.methods.item.GroundItems;
 import org.dreambot.api.wrappers.items.Item;
@@ -31,8 +32,8 @@ public class Arrow {
     }
     public void EquipArrow(){
         Item arrow;
-        if(EquipmentSlot.ARROWS  != null){
-            arrow = Inventory.get(item -> item != null && item.getName().equals(EquipmentSlot.ARROWS.name()));
+        if(Equipment.getItemInSlot(EquipmentSlot.ARROWS.getSlot())  != null){
+            arrow = Inventory.get(item -> item != null && item.getName().equals(Equipment.getItemInSlot(EquipmentSlot.ARROWS.getSlot()).getName()));
         }else{
             arrow = Inventory.get(item -> item.getName().toUpperCase().contains("ARROW") && item != null);
         }

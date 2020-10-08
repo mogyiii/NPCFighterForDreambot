@@ -1,8 +1,13 @@
 package Combat;
 
 import Factory.Factory;
+import Factory.Methods.PlayerEquipment;
 import GUI.Window;
 import org.dreambot.api.methods.Calculations;
+import org.dreambot.api.methods.container.impl.equipment.Equipment;
+import org.dreambot.api.methods.container.impl.equipment.EquipmentSlot;
+import org.dreambot.api.methods.skills.Skill;
+import org.dreambot.api.methods.skills.SkillTracker;
 import org.dreambot.api.script.AbstractScript;
 import org.dreambot.api.script.Category;
 import org.dreambot.api.script.ScriptManifest;
@@ -51,12 +56,7 @@ public class Main extends AbstractScript {
 	public int onLoop() {
 		if(get_CombatVariables().isStarted() && !_factory.getMain().getRandomManager().isSolving()){
 			if(!IsSaved && !_factory.getMain().getRandomManager().getWelcomeScreenSolver().shouldExecute()){
-				_factory.getItems().setStartedItems();
-				_factory.getItems().setEquipItems();
-				_factory.getBotArea().setStartedArea();
-				_factory.getBotArea().setWalkToArea(_factory.getBotArea().getStartedArea());
-				get_CombatVariables().get_window().setVisible(false);
-				IsSaved = true;
+				Start();
 			}
 
 			_factory.getWalking().WalkingHandler();
@@ -103,7 +103,32 @@ public class Main extends AbstractScript {
 	public Factory get_factory() {
 		return _factory;
 	}
-
+	public void Start(){
+		_factory.getItems().setStartedItems();
+		_factory.getBotArea().setStartedArea();
+		_factory.getBotArea().setWalkToArea(_factory.getBotArea().getStartedArea());
+		new PlayerEquipment(
+				Equipment.getItemInSlot(EquipmentSlot.HAT.getSlot()),
+				Equipment.getItemInSlot(EquipmentSlot.CHEST.getSlot()),
+				Equipment.getItemInSlot(EquipmentSlot.WEAPON.getSlot()),
+				Equipment.getItemInSlot(EquipmentSlot.SHIELD.getSlot()),
+				Equipment.getItemInSlot(EquipmentSlot.AMULET.getSlot()),
+				Equipment.getItemInSlot(EquipmentSlot.LEGS.getSlot()),
+				Equipment.getItemInSlot(EquipmentSlot.FEET.getSlot()),
+				Equipment.getItemInSlot(EquipmentSlot.RING.getSlot()),
+				Equipment.getItemInSlot(EquipmentSlot.CAPE.getSlot())
+		);
+		SkillTracker.start(Skill.PRAYER);
+		SkillTracker.start(Skill.HITPOINTS);
+		SkillTracker.start(Skill.STRENGTH);
+		SkillTracker.start(Skill.DEFENCE);
+		SkillTracker.start(Skill.ATTACK);
+		SkillTracker.start(Skill.RANGED);
+		SkillTracker.start(Skill.MAGIC);
+		_factory.getSkillCheck().SkillCheckSelectType();
+		get_CombatVariables().get_window().setVisible(false);
+		IsSaved = true;
+	}
 	public boolean isSaved() {
 		return IsSaved;
 	}

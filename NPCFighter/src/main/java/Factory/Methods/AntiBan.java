@@ -7,8 +7,10 @@ import org.dreambot.api.methods.input.Camera;
 import org.dreambot.api.methods.skills.Skill;
 import org.dreambot.api.methods.skills.Skills;
 import org.dreambot.api.methods.tabs.Tabs;
+import org.dreambot.api.methods.trade.Trade;
 import org.dreambot.api.methods.world.Worlds;
 import org.dreambot.api.methods.worldhopper.WorldHopper;
+import org.dreambot.api.wrappers.widgets.message.Message;
 
 import java.util.Random;
 
@@ -54,16 +56,17 @@ public class AntiBan {
                 _factory.getInteractionUser().SetActivity("Anti-ban: Hop world");
 
                 if (!Client.isMembers()) {
-                    WorldHopper.hopWorld(Worlds.f2p().get(RandomAntibanSelector.nextInt(_factory.getMain().getWorlds().f2p().size())).getID(), WorldHopper.openWorldHopper());
+                    WorldHopper.hopWorld(Worlds.f2p().get(RandomAntibanSelector.nextInt(Worlds.f2p().size())).getWorld(), WorldHopper.openWorldHopper());
                     WorldHopper.isWorldHopperOpen();
                     _factory.getMain().sleep(5000, 7000);
                 } else {
-                    WorldHopper.hopWorld(Worlds.members().get(RandomAntibanSelector.nextInt(_factory.getMain().getWorlds().f2p().size())).getID(), WorldHopper.openWorldHopper());
+                    WorldHopper.hopWorld(Worlds.members().get(RandomAntibanSelector.nextInt(Worlds.f2p().size())).getWorld(), WorldHopper.openWorldHopper());
                     WorldHopper.isWorldHopperOpen();
                     _factory.getMain().sleep(5000, 7000);
                 }
             }
         }
+
     }
     private String ChoseRandomSkill(){
         String[] Skills = new String[]{"Strength", "Attack", "Prayer", "Magic", "Defend", "Ranged", "Hitpoints"};

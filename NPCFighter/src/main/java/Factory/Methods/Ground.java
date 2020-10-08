@@ -3,6 +3,7 @@ package Factory.Methods;
 import Factory.Enums.InteractionCenter;
 import Factory.Factory;
 import org.dreambot.api.methods.container.impl.Inventory;
+import org.dreambot.api.methods.container.impl.equipment.Equipment;
 import org.dreambot.api.methods.item.GroundItems;
 import org.dreambot.api.methods.walking.impl.Walking;
 import org.dreambot.api.wrappers.items.GroundItem;
@@ -31,12 +32,12 @@ public class Ground {
     }
     public void TakeSelectedItem(){
         for(int i = 0; i < GroundItems.all().size(); i++){
-            //TakeList
+            //Take List
             for(int j = 0; j < _factory.getMain().get_CombatVariables().get_WindowVariables().getPickUpItems().length; j++){
                 GroundItem scannedItem = GroundItems.all().get(i);
                 if(scannedItem.toString().toUpperCase().equals(_factory.getMain().get_CombatVariables().get_WindowVariables().getPickUpItems()[j].toUpperCase())){
-
                     if(_factory.getBotArea().getWalkToArea().contains(scannedItem.getTile())){
+                        scannedItem.interact(InteractionCenter.Take.toString());
                         do{
                             if(BreakWhile()){
                                 break;
@@ -48,7 +49,7 @@ public class Ground {
                 }
             }
         }
-        //TakeHightValueItem
+        //Take Hight Value Item
         for (int j = 0; j < GroundItems.all().size(); j++){
             GroundItem scannedItem = GroundItems.all().get(j);
             //_factory.getMain().log("Size: " + GroundItems.all().size() + " Name: " + scannedItem.getName() + " ID: " + scannedItem.getID());
@@ -56,6 +57,7 @@ public class Ground {
                 GELookupResult lookupResult = _factory.getGrandExchangeApi().lookup(scannedItem.getID());
                 if(lookupResult.price >= _factory.getMain().get_CombatVariables().get_WindowVariables().getPickupItemCost() && lookupResult != null){
                     if(_factory.getBotArea().getWalkToArea().contains(scannedItem.getTile())){
+                        scannedItem.interact(InteractionCenter.Take.toString());
                         do{
                             if(BreakWhile()){
                                 break;
@@ -66,7 +68,34 @@ public class Ground {
                     }
                 }
             }
+        }
+        //CheckEquipment items
+        if(_factory.getBotArea().getWalkToArea().contains(_factory.getMain().getLocalPlayer().getTile())){
+            if(!_factory.getItems().CheckEquipmentItems()){
+                for(int j = 0; j < GroundItems.all().size(); j++){
+                    GroundItem IndexedGroundItem = GroundItems.all().get(j);
+                    for(int i = 0; i < _factory.getItems().getStarterItemsList().size(); i++){
+                        Item IndexedItem = _factory.getItems().getStarterItemsList().get(i);
+                        if(IndexedItem == null){
 
+                        } else if(IndexedGroundItem.getName().equals(IndexedItem.getName())) {
+                            if (_factory.getBotArea().getWalkToArea().contains(IndexedGroundItem.getTile())) {
+                                IndexedGroundItem.interact(InteractionCenter.Take.toString());
+                                do {
+                                    if (BreakWhile()) {
+                                        break;
+                                    }
+                                    _factory.getMain().sleep(100, 500);
+                                } while (IndexedGroundItem != null || _factory.getMain().getLocalPlayer().isMoving());
+                                _factory.getTime().setActionTime(0);
+                                if (Inventory.contains(IndexedGroundItem.getName()) && !Equipment.contains(IndexedGroundItem.getName())) {
+                                    IndexedGroundItem.interact(InteractionCenter.Equip.toString());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 

@@ -79,10 +79,11 @@ public class SelectedAttackTypeHandle {
     private SkillDetails ChoseSkill(){
         SkillDetails  CheckSkillDetails = null;
         int SmallestIncrease = 99;
-        for(int i = 0; i < _factory.getSkillCheck().get_skillDetails().length; i++){
-            int SelectedSkillUpped = Skills.getRealLevel(Skill.valueOf(_factory.getSkillCheck().get_skillDetails()[i].get_Name())) - _factory.getSkillCheck().get_skillDetails()[i].get_StartLevel();
+        _factory.getMain().log("SkillDetails length: " + _factory.getSkillCheck().get_skillDetails().size());
+        for(int i = 0; i < _factory.getSkillCheck().get_skillDetails().size(); i++){
+            int SelectedSkillUpped = Skills.getRealLevel(Skill.valueOf(_factory.getSkillCheck().get_skillDetails().get(i).get_Name())) - _factory.getSkillCheck().get_skillDetails().get(i).get_StartLevel();
             if(SelectedSkillUpped < SmallestIncrease){
-                CheckSkillDetails = _factory.getSkillCheck().get_skillDetails()[i];
+                CheckSkillDetails = _factory.getSkillCheck().get_skillDetails().get(i);
             }
         }
         return CheckSkillDetails;

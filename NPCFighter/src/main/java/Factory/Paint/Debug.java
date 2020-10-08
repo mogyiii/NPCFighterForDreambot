@@ -29,7 +29,7 @@ public class Debug {
             NPC SelectedNpc = _factory.getCombat().getSelectedEnemy();
             Font font = new Font("Franklin Gothic Medium", Font.PLAIN, 10);
             graphics.setFont(font);
-            if(SelectedNpc.isOnScreen()){
+            if(SelectedNpc.isOnScreen() && SelectedNpc != null){
                 graphics.drawRect((int)SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().getX(),
                         (int)SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().getY(),
                         SelectedNpc.getModel().getEntity().getBoundingBox().getBounds().width,

@@ -15,7 +15,7 @@ public class Banking {
         _factory.getInteractionUser().SetActivity("Banking");
         NPC banker = NPCs.closest(npc -> npc != null && npc.hasAction(InteractionCenter.Bank.toString()));
         if (banker.interact(InteractionCenter.Bank.toString())) {
-            if (_factory.getMain().sleepUntil(() -> _factory.getMain().getBank().open(), 9000)) {
+            if (_factory.getMain().sleepUntil(() -> Bank.open(), 9000)) {
                 Bank.depositAllExcept(i -> _factory.getItems().getStarterItemsList().contains(i.getName()));
                 _factory.getMain().sleep(300, 500);
                 Bank.withdraw(i -> i.hasAction(InteractionCenter.Eat.toString()));

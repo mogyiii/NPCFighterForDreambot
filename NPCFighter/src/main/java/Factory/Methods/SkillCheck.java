@@ -4,29 +4,28 @@ import Factory.Factory;
 import org.dreambot.api.methods.skills.Skill;
 import org.dreambot.api.methods.skills.Skills;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SkillCheck{
     private Factory _factory;
-    private SkillDetails _skillDetails[]= new SkillDetails[]{};
-    private int SkillCount = 0;
+    private List<SkillDetails> _skillDetails = new ArrayList<>();
     public SkillCheck(Factory factory) {
         _factory = factory;
 
     }
     public void SkillCheckSelectType(){
         if(_factory.getMain().get_CombatVariables().get_WindowVariables().isUseAttack()){
-            _skillDetails[SkillCount] = new SkillDetails("Attack", Skills.getRealLevel(Skill.ATTACK));
-            SkillCount++;
+            _skillDetails.add(new SkillDetails("Attack", Skills.getRealLevel(Skill.ATTACK)));
         }
         if(_factory.getMain().get_CombatVariables().get_WindowVariables().isUseDefend()){
-            _skillDetails[SkillCount] = new SkillDetails("Defend", Skills.getRealLevel(Skill.DEFENCE));
-            SkillCount++;
+            _skillDetails.add(new SkillDetails("Defend", Skills.getRealLevel(Skill.DEFENCE)));
         }
         if(_factory.getMain().get_CombatVariables().get_WindowVariables().isUseStrength()){
-            _skillDetails[SkillCount] = new SkillDetails("Strength", Skills.getRealLevel(Skill.STRENGTH));
-            SkillCount++;
+            _skillDetails.add(new SkillDetails("Strength", Skills.getRealLevel(Skill.STRENGTH)));
         }
     }
-    public SkillDetails[] get_skillDetails() {
+    public List<SkillDetails> get_skillDetails() {
         return _skillDetails;
     }
 }
