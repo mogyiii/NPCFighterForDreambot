@@ -2,8 +2,10 @@ package Factory.Methods;
 
 import Factory.Factory;
 import Factory.Models.AttackSpellModel;
+import org.dreambot.api.methods.magic.Magic;
 import org.dreambot.api.methods.magic.Normal;
 import org.dreambot.api.methods.magic.Spell;
+import org.dreambot.api.methods.widget.Widgets;
 import org.dreambot.api.wrappers.widgets.WidgetChild;
 
 public class DynamicCombat {
@@ -18,14 +20,14 @@ public class DynamicCombat {
     private WidgetChild CombatMenuAltMenuSpellList;
     public DynamicCombat(Factory factory) {
         _factory = factory;
-        MeleeAttack = _factory.getMain().getWidgets().getWidgetChild(593, 5);
-        MeleeStrenght = _factory.getMain().getWidgets().getWidgetChild(593, 13);
-        MeleeDefend = _factory.getMain().getWidgets().getWidgetChild(593, 17);
-        Range = _factory.getMain().getWidgets().getWidgetChild(593, 5);
-        RangeWithDefend = _factory.getMain().getWidgets().getWidgetChild(593, 17);
-        SpellWithStaff = _factory.getMain().getWidgets().getWidgetChild(593, 27);
-        SpellWithStaffDefend = _factory.getMain().getWidgets().getWidgetChild(593, 22);
-        CombatMenuAltMenuSpellList = _factory.getMain().getWidgets().getWidgetChild(201, 1);
+        MeleeAttack = Widgets.getWidgetChild(593, 5);
+        MeleeStrenght = Widgets.getWidgetChild(593, 13);
+        MeleeDefend = Widgets.getWidgetChild(593, 17);
+        Range = Widgets.getWidgetChild(593, 5);
+        RangeWithDefend = Widgets.getWidgetChild(593, 17);
+        SpellWithStaff = Widgets.getWidgetChild(593, 27);
+        SpellWithStaffDefend = Widgets.getWidgetChild(593, 22);
+        CombatMenuAltMenuSpellList = Widgets.getWidgetChild(201, 1);
     }
     public WidgetChild getMeleeAttack() {
         return MeleeAttack;
@@ -62,10 +64,23 @@ public class DynamicCombat {
         AttackSpellModel[] spellModel;
         spellModel = _factory.getJSON().GetNewGson().fromJson(_factory.getJSON().getJson("AttackSpells.json"), AttackSpellModel[].class);
         for(int i = 0; i < spellModel.length - 1; i++){
-            if(_factory.getMain().getMagic().canCast(Normal.valueOf(spellModel[i].Spell))){
+            if(Magic.canCast(Normal.valueOf(spellModel[i].Spell))){
                 return Normal.valueOf(spellModel[i].Spell);
             }
         }
         return null;
+    }
+    public void IscanCastStrongest(int Parent, int Child) throws NullPointerException{
+        for(int i = 52; i >= 1; i--){
+            WidgetChild SpellWidget = Widgets.getWidgetChild(Parent, Child, i);
+            System.out.println(SpellWidget.getActions().length);
+            if(SpellWidget.getActions()[0] != null){
+                String SpellName = SpellWidget.getSelectedAction();
+                if(Magic.canCast(Normal.valueOf(SpellName))){
+                    SpellWidget.interact();
+                    break;
+                }
+            }
+        }
     }
 }

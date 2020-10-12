@@ -9,6 +9,9 @@ import org.dreambot.api.methods.walking.impl.Walking;
 import org.dreambot.api.wrappers.items.GroundItem;
 import org.dreambot.api.wrappers.items.Item;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static Moduls.GrandExchangeApi.GELookupResult;
 
 public class Ground {
@@ -43,7 +46,7 @@ public class Ground {
                                 break;
                             }
                             _factory.getMain().sleep(100, 500);
-                        }while (scannedItem != null || _factory.getMain().getLocalPlayer().isMoving());
+                        }while (scannedItem != null);
                         _factory.getTime().setActionTime(0);
                     }
                 }
@@ -63,7 +66,7 @@ public class Ground {
                                 break;
                             }
                             _factory.getMain().sleep(100, 500);
-                        }while (scannedItem != null || _factory.getMain().getLocalPlayer().isMoving());
+                        }while (scannedItem != null);
                         _factory.getTime().setActionTime(0);
                     }
                 }
@@ -89,7 +92,15 @@ public class Ground {
                                 } while (IndexedGroundItem != null || _factory.getMain().getLocalPlayer().isMoving());
                                 _factory.getTime().setActionTime(0);
                                 if (Inventory.contains(IndexedGroundItem.getName()) && !Equipment.contains(IndexedGroundItem.getName())) {
-                                    IndexedGroundItem.interact(InteractionCenter.Equip.toString());
+                                    List<String> ActionList = Arrays.asList(IndexedGroundItem.getActions());
+                                    if(ActionList.contains(InteractionCenter.Equip.toString())){
+                                        IndexedGroundItem.interact(InteractionCenter.Equip.toString());
+                                    }else if(ActionList.contains(InteractionCenter.Wield.toString())){
+                                        IndexedGroundItem.interact(InteractionCenter.Wield.toString());
+                                    }else if(ActionList.contains(InteractionCenter.Wear.toString())){
+                                        IndexedGroundItem.interact(InteractionCenter.Wear.toString());
+                                    }
+
                                 }
                             }
                         }

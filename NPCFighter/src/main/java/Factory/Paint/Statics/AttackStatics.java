@@ -17,7 +17,7 @@ public class AttackStatics {
     public static void DrawAttack(Graphics graphics){
         graphics.setColor(new Color(252, 236, 3));
         graphics.drawString("Attack level: " + Skills.getRealLevel(Skill.ATTACK) +
-                " (" + (Skills.getRealLevel(Skill.PRAYER) - SkillTracker.getStartLevel(Skill.ATTACK)) + ")", Line1[0], Line1[1]);
+                " (" + (Skills.getRealLevel(Skill.ATTACK) - SkillTracker.getStartLevel(Skill.ATTACK)) + ")", Line1[0], Line1[1]);
         graphics.drawString("Estimated Xp/hour: " + SkillTracker.getGainedExperiencePerHour(Skill.ATTACK), Line2[0], Line2[1]);
         graphics.drawString("Next level: " + SkillTracker.getTimeToLevel(Skill.ATTACK) / 60000 + "(Minutes)", Line3[0], Line3[1]);
         graphics.drawString("Xp gained: " + (SkillTracker.getGainedExperience(Skill.ATTACK)), Line4[0], Line4[1]);

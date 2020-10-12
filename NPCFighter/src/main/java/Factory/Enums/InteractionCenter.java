@@ -7,5 +7,7 @@ public enum InteractionCenter {
     Bank,
     Take,
     Bury,
-    Equip
+    Equip,
+    Wield,
+    Wear
 }

@@ -7,10 +7,8 @@ import org.dreambot.api.methods.input.Camera;
 import org.dreambot.api.methods.skills.Skill;
 import org.dreambot.api.methods.skills.Skills;
 import org.dreambot.api.methods.tabs.Tabs;
-import org.dreambot.api.methods.trade.Trade;
 import org.dreambot.api.methods.world.Worlds;
 import org.dreambot.api.methods.worldhopper.WorldHopper;
-import org.dreambot.api.wrappers.widgets.message.Message;
 
 import java.util.Random;
 
@@ -36,7 +34,7 @@ public class AntiBan {
             _factory.getInteractionUser().SetActivity("Anti-ban: Checking skill XP");
             Skills.open();
             _factory.getMain().sleep(100, 500);
-            Skills.hoverSkill(Skill.valueOf(ChoseRandomSkill().toUpperCase()));
+            Skills.hoverSkill(Skill.valueOf(ChoseRandomSkill().toString()));
             _factory.getMain().sleep(1000, 1500);
         }
         if(chances > 296 && chances < 350){
@@ -68,8 +66,8 @@ public class AntiBan {
         }
 
     }
-    private String ChoseRandomSkill(){
-        String[] Skills = new String[]{"Strength", "Attack", "Prayer", "Magic", "Defend", "Ranged", "Hitpoints"};
+    private Skill ChoseRandomSkill(){
+        Skill[] Skills = new Skill[]{Skill.STRENGTH, Skill.ATTACK, Skill.PRAYER, Skill.MAGIC, Skill.DEFENCE, Skill.RANGED, Skill.HITPOINTS};
         Random ran = new Random();
         return Skills[ran.nextInt(Skills.length - 1) + 0];
     }
