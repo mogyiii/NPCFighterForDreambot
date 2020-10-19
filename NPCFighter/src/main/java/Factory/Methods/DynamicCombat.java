@@ -18,6 +18,7 @@ public class DynamicCombat {
     private WidgetChild SpellWithStaff;
     private WidgetChild SpellWithStaffDefend;
     private WidgetChild CombatMenuAltMenuSpellList;
+    static AttackSpellModel[] spellModel = null;
     public DynamicCombat(Factory factory) {
         _factory = factory;
         MeleeAttack = Widgets.getWidgetChild(593, 5);
@@ -61,8 +62,9 @@ public class DynamicCombat {
         return SpellWithStaffDefend;
     }
     public Spell GetStrongestSpellWhichCast(){
-        AttackSpellModel[] spellModel;
-        spellModel = _factory.getJSON().GetNewGson().fromJson(_factory.getJSON().getJson("AttackSpells.json"), AttackSpellModel[].class);
+        if(spellModel == null){
+            spellModel = _factory.getJSON().GetNewGson().fromJson(_factory.getJSON().getJson("AttackSpells.json"), AttackSpellModel[].class);
+        }
         for(int i = 0; i < spellModel.length - 1; i++){
             if(Magic.canCast(Normal.valueOf(spellModel[i].Spell))){
                 return Normal.valueOf(spellModel[i].Spell);

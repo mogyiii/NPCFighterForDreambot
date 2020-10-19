@@ -8,5 +8,5 @@ public class FoodsModel{
 
     public boolean IsMember;
 
-    public String GPperHeal;
+    public float GPperHeal;
 }

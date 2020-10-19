@@ -33,6 +33,7 @@ public class Factory {
     private Buttons buttons;
     private Debug Debug;
     private GrandExchangeApi grandExchangeApi;
+    private PlayerEquipment playerEquipment;
     public Factory(Main main) {
         this._main = main;
         this._Npcs = new Npcs(this);
@@ -154,5 +155,13 @@ public class Factory {
 
     public Debug getDebug() {
         return Debug;
+    }
+
+    public PlayerEquipment getPlayerEquipment() {
+        return playerEquipment;
+    }
+
+    public void setPlayerEquipment(PlayerEquipment playerEquipment) {
+        this.playerEquipment = playerEquipment;
     }
 }

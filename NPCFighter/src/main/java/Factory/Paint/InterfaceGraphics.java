@@ -3,6 +3,9 @@ package Factory.Paint;
 import Factory.Enums.DrawSkill;
 import Factory.Factory;
 import Factory.Paint.Statics.*;
+import org.dreambot.api.methods.combat.Combat;
+import org.dreambot.api.methods.skills.Skills;
+import org.dreambot.api.methods.world.Worlds;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -92,6 +95,12 @@ public class InterfaceGraphics {
     }
     private void GeneralDraw(Graphics graphics){
         graphics.drawString("Time running: " + _factory.getTime().eclapsedtime(_factory.getTime().getStartTime()), 22, 51);
+        graphics.drawString("Combat level: " + _factory.getMain().getLocalPlayer().getLevel(), 22, 70);
+        graphics.drawString("Total level: " + Skills.getTotalLevel(), 22, 90);
+        graphics.drawString("Current world: " + Worlds.getCurrentWorld(), 22, 110);
+        graphics.drawString("Is MultiCombat Area? (" + Combat.isInMultiCombat() + ")", 22, 130);
+        graphics.drawString("Is Special active? (" + Combat.isSpecialActive() + ")", 22, 150);
+        graphics.drawString("Hits: " + _factory.getMain().getLocalPlayer().getHitSplats(), 22, 170);
         graphics.drawString(_factory.getInteractionUser().getActivity() + dot(), 22, 185);
     }
 

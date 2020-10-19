@@ -16,9 +16,14 @@ public class Banking {
         NPC banker = NPCs.closest(npc -> npc != null && npc.hasAction(InteractionCenter.Bank.toString()));
         if (banker.interact(InteractionCenter.Bank.toString())) {
             if (_factory.getMain().sleepUntil(() -> Bank.open(), 9000)) {
-                Bank.depositAllExcept(i -> _factory.getItems().getStarterItemsList().contains(i.getName()));
+                Bank.depositAllExcept(_factory.getItems().getStarterItemsFilter());
                 _factory.getMain().sleep(300, 500);
-                Bank.withdraw(i -> i.hasAction(InteractionCenter.Eat.toString()));
+                for(int i = 0; i < _factory.getEAT().getFoodIDs().length; i++){
+                    if(Bank.contains(_factory.getEAT().getFoodIDs()[i])){
+                        Bank.withdrawAll(_factory.getEAT().getFoodIDs()[i]);
+                        break;
+                    }
+                }
                 _factory.getMain().sleep(300, 500);
                 Bank.close();
                 _factory.getMain().sleep(200, 3000);

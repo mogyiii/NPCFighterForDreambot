@@ -107,7 +107,7 @@ public class Main extends AbstractScript {
 		_factory.getItems().setStartedItems();
 		_factory.getBotArea().setStartedArea();
 		_factory.getBotArea().setWalkToArea(_factory.getBotArea().getStartedArea());
-		new PlayerEquipment(
+		_factory.setPlayerEquipment(new PlayerEquipment(
 				Equipment.getItemInSlot(EquipmentSlot.HAT.getSlot()),
 				Equipment.getItemInSlot(EquipmentSlot.CHEST.getSlot()),
 				Equipment.getItemInSlot(EquipmentSlot.WEAPON.getSlot()),
@@ -117,7 +117,7 @@ public class Main extends AbstractScript {
 				Equipment.getItemInSlot(EquipmentSlot.FEET.getSlot()),
 				Equipment.getItemInSlot(EquipmentSlot.RING.getSlot()),
 				Equipment.getItemInSlot(EquipmentSlot.CAPE.getSlot())
-		);
+		));
 		SkillTracker.start(Skill.PRAYER);
 		SkillTracker.start(Skill.HITPOINTS);
 		SkillTracker.start(Skill.STRENGTH);

@@ -35,8 +35,8 @@ public class SelectedAttackTypeHandle {
     private void Range(){
         if(ChoseSkill() != null){
             _factory.getInteractionUser().SetActivity("Select combat type");
-            Tabs.openWithMouse(Tab.COMBAT);
             if(ChoseSkill().get_Name().equals(Skill.DEFENCE.toString()) && _factory.getSkillCheck().SelectedSkills != Skill.DEFENCE){
+                Tabs.openWithMouse(Tab.COMBAT);
                 _factory.getDynamicCombat().getRangeWithDefend().interact();
                 _factory.getSkillCheck().SelectedSkills = Skill.DEFENCE;
             }

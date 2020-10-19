@@ -42,9 +42,13 @@ public class Fight {
                     }
                 }
             }
-            if(SelectedEnemy.getHealthPercent() >= 1){
-                SelectedEnemy.interact(InteractionCenter.Attack.toString());
-            }else{
+            try{
+                if(SelectedEnemy != null && SelectedEnemy.getHealthPercent() >= 10){
+                    SelectedEnemy.interact(InteractionCenter.Attack.toString());
+                }else{
+                    SelectedEnemy = null;
+                }
+            }catch (Exception e){
                 SelectedEnemy = null;
             }
         }else{

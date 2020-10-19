@@ -37,7 +37,7 @@ public class AntiBan {
             Skills.hoverSkill(Skill.valueOf(ChoseRandomSkill().toString()));
             _factory.getMain().sleep(1000, 1500);
         }
-        if(chances > 296 && chances < 350){
+        if(chances > 330 && chances < 350){
             _factory.getInteractionUser().SetActivity("Anti-ban: Move cursor Outside Screen");
             Mouse.moveMouseOutsideScreen();
             _factory.getMain().sleep(2888, 5111);

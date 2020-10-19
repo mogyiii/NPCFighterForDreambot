@@ -9,5 +9,6 @@ public enum InteractionCenter {
     Bury,
     Equip,
     Wield,
-    Wear
+    Wear,
+    Loot
 }

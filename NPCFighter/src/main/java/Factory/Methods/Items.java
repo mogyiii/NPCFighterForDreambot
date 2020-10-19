@@ -3,6 +3,7 @@ package Factory.Methods;
 import Factory.Factory;
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.container.impl.equipment.Equipment;
+import org.dreambot.api.methods.filter.Filter;
 import org.dreambot.api.wrappers.items.Item;
 
 import java.util.ArrayList;
@@ -21,6 +22,9 @@ public class Items {
     }
     public List<Item> getStarterItemsList(){
         return StartedItems;
+    }
+    public Filter<Item> getStarterItemsFilter(){
+        return (Filter<Item>) StartedItems;
     }
     public boolean CheckEquipmentItems(){
         PlayerEquipmentsStarted = new Item[]{

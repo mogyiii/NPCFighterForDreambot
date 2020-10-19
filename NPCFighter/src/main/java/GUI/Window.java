@@ -2,6 +2,7 @@ package GUI;
 
 import Combat.Main;
 import Factory.AttackType;
+import Factory.Enums.InteractionCenter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -104,7 +105,7 @@ public class Window extends JFrame{
     }
     private void SearchNpc(ActionEvent e){
         for(int i = 0; i < _main.get_factory().getNpcs().GetAllNpc().size(); i++){
-            if(!hasElement(_main.get_factory().getNpcs().GetAllNpc().get(i).getName(), ScannedList)){
+            if(!hasElement(_main.get_factory().getNpcs().GetAllNpc().get(i).getName(), ScannedList) && _main.get_factory().getNpcs().GetAllNpc().get(i).hasAction(InteractionCenter.Attack.toString())){
                 ScannedList.add(_main.get_factory().getNpcs().GetAllNpc().get(i).getName());
             }
         }
@@ -166,7 +167,7 @@ public class Window extends JFrame{
 
 		springLayout.putConstraint(SpringLayout.NORTH, PickupItemCostSpinner, 18, SpringLayout.SOUTH, SearchNPCButton);
         contentPane.add(PickupItemCostSpinner);
-
+		PickupItemCostSpinner.setValue(500);
         PickUpItemLabel.setText("Pick up item");
 		springLayout.putConstraint(SpringLayout.EAST, PickUpItemLabel, -109, SpringLayout.EAST, contentPane);
 		springLayout.putConstraint(SpringLayout.WEST, PickupItemCostSpinner, 6, SpringLayout.EAST, PickUpItemLabel);
@@ -175,7 +176,7 @@ public class Window extends JFrame{
 
         GPLabel.setText("Gp");
 		springLayout.putConstraint(SpringLayout.EAST, PickupItemCostSpinner, -6, SpringLayout.WEST, GPLabel);
-		springLayout.putConstraint(SpringLayout.NORTH, GPLabel, 232, SpringLayout.NORTH, contentPane);
+		springLayout.putConstraint(SpringLayout.NORTH, GPLabel, 224, SpringLayout.NORTH, contentPane);
 		springLayout.putConstraint(SpringLayout.EAST, GPLabel, -5, SpringLayout.EAST, contentPane);
         contentPane.add(GPLabel);
 
@@ -228,31 +229,35 @@ public class Window extends JFrame{
 
         AddItemLabel.setText("Item name:");
 		springLayout.putConstraint(SpringLayout.NORTH, AddItemTextField, -3, SpringLayout.NORTH, AddItemLabel);
+		springLayout.putConstraint(SpringLayout.WEST, AddItemLabel, 27, SpringLayout.EAST, AddedItemsList);
 		springLayout.putConstraint(SpringLayout.WEST, AddItemTextField, 6, SpringLayout.EAST, AddItemLabel);
 		springLayout.putConstraint(SpringLayout.SOUTH, AddItemLabel, -197, SpringLayout.SOUTH, contentPane);
         contentPane.add(AddItemLabel);
 
+		RemoveItemButton.setText("Remove");
+		springLayout.putConstraint(SpringLayout.WEST, RemoveItemButton, 100, SpringLayout.EAST, AddedItemsList);
+		springLayout.putConstraint(SpringLayout.EAST, RemoveItemButton, -53, SpringLayout.EAST, contentPane);
+		springLayout.putConstraint(SpringLayout.SOUTH, RemoveItemButton, 0, SpringLayout.SOUTH, AddedItemsList);
+		contentPane.add(RemoveItemButton);
+
         AddItemButton.setText("Add");
+		springLayout.putConstraint(SpringLayout.WEST, AddItemButton, 100, SpringLayout.EAST, AddedItemsList);
 		springLayout.putConstraint(SpringLayout.EAST, AddItemButton, -53, SpringLayout.EAST, contentPane);
+		springLayout.putConstraint(SpringLayout.SOUTH, AddItemButton, -6, SpringLayout.NORTH, RemoveItemButton);
         contentPane.add(AddItemButton);
 
 		springLayout.putConstraint(SpringLayout.SOUTH, SelectedList, -188, SpringLayout.NORTH, AddedItemsList);
 		AddedItemsList.setForeground(new Color(255, 255, 255));
 		AddedItemsList.setBackground(new Color(0, 51, 51));
-		springLayout.putConstraint(SpringLayout.WEST, AddItemButton, 85, SpringLayout.EAST, AddedItemsList);
-		springLayout.putConstraint(SpringLayout.WEST, AddItemLabel, 27, SpringLayout.EAST, AddedItemsList);
+
+
 		springLayout.putConstraint(SpringLayout.SOUTH, AddedItemsList, -103, SpringLayout.NORTH, StartBtn);
 		AddedItemsList.setMultipleSelections(true);
 		springLayout.putConstraint(SpringLayout.WEST, AddedItemsList, 10, SpringLayout.WEST, contentPane);
 		springLayout.putConstraint(SpringLayout.EAST, AddedItemsList, 210, SpringLayout.WEST, contentPane);
         contentPane.add(AddedItemsList);
 
-        RemoveItemButton.setText("Remove");
-		springLayout.putConstraint(SpringLayout.WEST, RemoveItemButton, 85, SpringLayout.EAST, AddedItemsList);
-		springLayout.putConstraint(SpringLayout.EAST, RemoveItemButton, -53, SpringLayout.EAST, contentPane);
-		springLayout.putConstraint(SpringLayout.SOUTH, AddItemButton, -6, SpringLayout.NORTH, RemoveItemButton);
-		springLayout.putConstraint(SpringLayout.SOUTH, RemoveItemButton, 0, SpringLayout.SOUTH, AddedItemsList);
-        contentPane.add(RemoveItemButton);
+
 
         PickUpItemsLabel.setText("Pick up Items:");
 		springLayout.putConstraint(SpringLayout.WEST, PickUpItemsLabel, 10, SpringLayout.WEST, contentPane);
@@ -278,8 +283,9 @@ public class Window extends JFrame{
 
         PickUpArrowCheckBox.setText("Pick Up Arrow");
 		springLayout.putConstraint(SpringLayout.NORTH, PickUpArrowCheckBox, 6, SpringLayout.SOUTH, WorldHopperCheckBox);
-		springLayout.putConstraint(SpringLayout.EAST, PickUpArrowCheckBox, 0, SpringLayout.EAST, SpecialAttackCheckBox);
+		springLayout.putConstraint(SpringLayout.EAST, PickUpArrowCheckBox, 4, SpringLayout.EAST, SpecialAttackCheckBox);
         contentPane.add(PickUpArrowCheckBox);
+		PickUpArrowCheckBox.setSelected(true);
 
         AttackCheckBox.setText("Attack");
 		springLayout.putConstraint(SpringLayout.NORTH, AttackCheckBox, 19, SpringLayout.SOUTH, MeleeRadioButton);
