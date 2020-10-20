@@ -16,7 +16,8 @@ public class Banking {
         NPC banker = NPCs.closest(npc -> npc != null && npc.hasAction(InteractionCenter.Bank.toString()));
         if (banker.interact(InteractionCenter.Bank.toString())) {
             if (_factory.getMain().sleepUntil(() -> Bank.open(), 9000)) {
-                Bank.depositAllExcept(_factory.getItems().getStarterItemsFilter());
+                //Bank.depositAllExcept(_factory.getItems().getStarterItemsFilter());
+                Bank.depositAllExcept(i -> _factory.getItems().getStarterItemsList().contains(i.getName()));
                 _factory.getMain().sleep(300, 500);
                 for(int i = 0; i < _factory.getEAT().getFoodIDs().length; i++){
                     if(Bank.contains(_factory.getEAT().getFoodIDs()[i])){
@@ -29,5 +30,6 @@ public class Banking {
                 _factory.getMain().sleep(200, 3000);
             }
         }
+        _factory.getBotArea().setWalkToArea(_factory.getBotArea().getStartedArea());
     }
 }

@@ -15,9 +15,18 @@ public class Walks {
         _factory = factory;
     }
     public void WalkingHandler(){
-        Item FoodsorBones = Inventory.get(item -> item != null && !item.hasAction(InteractionCenter.Eat.toString()) && !item.hasAction(InteractionCenter.Bury.toString()));
-        if (FoodsorBones == null) {
-            if((Inventory.isFull() || _factory.getMain().getLocalPlayer().getHealthPercent() < 30)){
+        Item Foods = Inventory.get(item -> item != null && (item.hasAction(InteractionCenter.Eat.toString()) ));
+        Item Bones = Inventory.get(item -> item != null && item.hasAction(InteractionCenter.Bury.toString()));
+        if ((Bones == null && Foods == null && (Inventory.isFull() || _factory.getMain().getLocalPlayer().getHealthPercent() < 30))
+            || (Bones != null && Foods == null && _factory.getMain().getLocalPlayer().getHealthPercent() < 30)) {
+                if(Inventory.isFull()){
+                    _factory.getMain().log("Go to Bank!");
+                    _factory.getInteractionUser().SetActivity("Go to Bank!");
+
+                }else{
+                    _factory.getMain().log("Escaping!");
+                    _factory.getInteractionUser().SetActivity("Escaping!");
+                }
                 _factory.getBotArea().setWalkToArea(Bank.getClosestBankLocation().getArea(3));
                 while(true){
                     if(_factory.getBotArea().getWalkToArea().contains(_factory.getMain().getLocalPlayer().getTile())){
@@ -26,7 +35,6 @@ public class Walks {
                     }
                     WalkTo();
                 }
-            }
         }else{
             _factory.getBotArea().setWalkToArea(_factory.getBotArea().getStartedArea());
             while(true && _factory.getBotArea() != null){

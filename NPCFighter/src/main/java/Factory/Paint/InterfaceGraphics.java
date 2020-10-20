@@ -4,6 +4,8 @@ import Factory.Enums.DrawSkill;
 import Factory.Factory;
 import Factory.Paint.Statics.*;
 import org.dreambot.api.methods.combat.Combat;
+import org.dreambot.api.methods.skills.Skill;
+import org.dreambot.api.methods.skills.SkillTracker;
 import org.dreambot.api.methods.skills.Skills;
 import org.dreambot.api.methods.world.Worlds;
 
@@ -94,13 +96,13 @@ public class InterfaceGraphics {
                 (int)_factory.getButtons().getHoverBtn().getHeight());
     }
     private void GeneralDraw(Graphics graphics){
-        graphics.drawString("Time running: " + _factory.getTime().eclapsedtime(_factory.getTime().getStartTime()), 22, 51);
-        graphics.drawString("Combat level: " + _factory.getMain().getLocalPlayer().getLevel(), 22, 70);
-        graphics.drawString("Total level: " + Skills.getTotalLevel(), 22, 90);
-        graphics.drawString("Current world: " + Worlds.getCurrentWorld(), 22, 110);
-        graphics.drawString("Is MultiCombat Area? (" + Combat.isInMultiCombat() + ")", 22, 130);
-        graphics.drawString("Is Special active? (" + Combat.isSpecialActive() + ")", 22, 150);
-        graphics.drawString("Hits: " + _factory.getMain().getLocalPlayer().getHitSplats(), 22, 170);
+        graphics.drawString("Time running: " + _factory.getTime().eclapsedtime(_factory.getTime().getStartTime()), 22, 45);
+        graphics.drawString("Combat level: " + _factory.getMain().getLocalPlayer().getLevel(), 22, 65);
+        graphics.drawString("Total level: " + Skills.getTotalLevel(), 22, 85);
+        graphics.drawString("Current world: " + Worlds.getCurrentWorld(), 22, 105);
+        graphics.drawString("Is MultiCombat Area? (" + Combat.isInMultiCombat() + ")", 22, 125);
+        graphics.drawString("Special percentage: " + Combat.getSpecialPercentage(), 22, 145);
+        graphics.drawString("Total estimated Xp/hour: " + TotalEstimatedXp(), 22, 165);
         graphics.drawString(_factory.getInteractionUser().getActivity() + dot(), 22, 185);
     }
 
@@ -142,5 +144,13 @@ public class InterfaceGraphics {
     public void setSelectedDrawSkill(DrawSkill selectedDrawSkill) {
         this.selectedDrawSkill = selectedDrawSkill;
     }
-
+    public float TotalEstimatedXp(){
+        return SkillTracker.getGainedExperiencePerHour(Skill.MAGIC)
+                + SkillTracker.getGainedExperiencePerHour(Skill.PRAYER)
+                + SkillTracker.getGainedExperiencePerHour(Skill.ATTACK)
+                + SkillTracker.getGainedExperiencePerHour(Skill.STRENGTH)
+                + SkillTracker.getGainedExperiencePerHour(Skill.DEFENCE)
+                + SkillTracker.getGainedExperiencePerHour(Skill.HITPOINTS)
+                + SkillTracker.getGainedExperiencePerHour(Skill.RANGED);
+    }
 }

@@ -58,12 +58,12 @@ public class Main extends AbstractScript {
 			if(!IsSaved && !_factory.getMain().getRandomManager().getWelcomeScreenSolver().shouldExecute()){
 				Start();
 			}
-
-			_factory.getWalking().WalkingHandler();
 			if(_factory.getCombat().getSelectedEnemy() == null){
 				_factory.getGround().BonesHandle();
 				_factory.getArrow().ArrowHandler();
 			}
+			_factory.getWalking().WalkingHandler();
+
 			_factory.getSelectedAttackTypeHandle().SelectCombatType();
 			_factory.getArrow().EquipArrow();
 			_factory.getPotions().CheckCanDrinkPotion();

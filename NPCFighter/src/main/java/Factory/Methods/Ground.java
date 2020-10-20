@@ -2,6 +2,7 @@ package Factory.Methods;
 
 import Factory.Enums.InteractionCenter;
 import Factory.Factory;
+import org.dreambot.api.input.Mouse;
 import org.dreambot.api.methods.container.impl.Inventory;
 import org.dreambot.api.methods.container.impl.equipment.Equipment;
 import org.dreambot.api.methods.interactive.GameObjects;
@@ -39,10 +40,10 @@ public class Ground {
     }
     public void TakeSelectedItem(){
         GroundItemsArray = new ArrayList<>();
+        CheckGrave();
         TakeList();
         TakeHightValueItem();
         //CheckEquipmentItems();
-        CheckGrave();
         TakeBones();
         TakeItemsFromGround();
     }
@@ -75,16 +76,15 @@ public class Ground {
         }
     }
     private void CheckGrave(){
-        for(int i = 0; i < GameObjects.all("Grave").size(); i++){
-            if(GameObjects.all("Grave").get(i).exists()){
-                GameObject Grave = GameObjects.all("Grave").get(i);
-                if(Grave.hasAction(InteractionCenter.Loot.toString())){
-                    _factory.getMain().log("Looting Grave!");
-                    _factory.getMain().sleep(400, 600);
-                    for(int j = 0; j < _factory.getPlayerEquipment().GetEquipmentItems().size(); j++){
-                        EquipItem(_factory.getPlayerEquipment().GetEquipmentItems().get(j).getName());
-                    }
-                }
+        GameObject Grave =GameObjects.closest(grave -> grave != null && grave.hasAction("Loot"));
+        if(Grave != null){
+            _factory.getMain().log("Looting Grave!");
+            _factory.getInteractionUser().SetActivity("Looting Grave!");
+            Mouse.click(Grave);
+            Grave.hasAction(InteractionCenter.Loot.toString());
+            _factory.getMain().sleep(400, 600);
+            for(int j = 0; j < _factory.getPlayerEquipment().GetEquipmentItems().size(); j++){
+                EquipItem(_factory.getPlayerEquipment().GetEquipmentItems().get(j).getName());
             }
         }
     }
