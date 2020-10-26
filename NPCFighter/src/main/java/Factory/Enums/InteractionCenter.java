@@ -10,5 +10,6 @@ public enum InteractionCenter {
     Equip,
     Wield,
     Wear,
-    Loot
+    Loot,
+    Cast
 }

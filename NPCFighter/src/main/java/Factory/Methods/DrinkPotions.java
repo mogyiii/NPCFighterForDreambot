@@ -18,50 +18,53 @@ public class DrinkPotions {
     }
 
     public void CheckCanDrinkPotion(){
-        if(PotionsModel == null){
-            PotionsModel = _factory.getJSON().GetNewGson().fromJson(_factory.getJSON().getJson("Potions.json"), PotionsModel[].class);
-        }
-        Item Potion = Inventory.get(item -> item != null && item.getName().contains("potion") && item.hasAction(InteractionCenter.Drink.toString()));
-        if(Potion != null){
-            for(int i = 0; i < PotionsModel.length; i ++){
-                if(Skills.getRealLevel(Skill.PRAYER) >= Skills.getBoostedLevels(Skill.PRAYER)){
-                    if(Potion.getName().contains(PotionsModel[i].Name) && (PotionsModel[i].Type.equals(PotionsType.Prayer.toString()))){
-                        Potion.interact(InteractionCenter.Drink.toString());
-                        break;
+        try{
+            if(PotionsModel == null){
+                //PotionsModel = _factory.getJSON().GetNewGson().fromJson(_factory.getJSON().getJson("Potions.json"), PotionsModel[].class);
+                PotionsModel = _factory.getJSON().GetNewGson().fromJson(_factory.getDownload().DownloadString("https://raw.githubusercontent.com/mogyiii/NPCFighterForDreambot/master/NPCFighter/resources/Potions.json"), PotionsModel[].class);
+            }
+            Item Potion = Inventory.get(item -> item != null && item.getName().contains("potion") && item.hasAction(InteractionCenter.Drink.toString()));
+            if(Potion != null){
+                for(int i = 0; i < PotionsModel.length; i ++){
+                    if(Skills.getRealLevel(Skill.PRAYER) >= Skills.getBoostedLevels(Skill.PRAYER)){
+                        if(Potion.getName().contains(PotionsModel[i].Name) && (PotionsModel[i].Type.equals(PotionsType.Prayer.toString()))){
+                            Potion.interact(InteractionCenter.Drink.toString());
+                            break;
+                        }
                     }
-                }
-                if(Skills.getRealLevel(Skill.ATTACK) >= Skills.getBoostedLevels(Skill.ATTACK)){
-                    if(Potion.getName().contains(PotionsModel[i].Name) && (PotionsModel[i].Type.equals(PotionsType.Attack.toString()))){
-                        Potion.interact(InteractionCenter.Drink.toString());
-                        break;
+                    if(Skills.getRealLevel(Skill.ATTACK) >= Skills.getBoostedLevels(Skill.ATTACK)){
+                        if(Potion.getName().contains(PotionsModel[i].Name) && (PotionsModel[i].Type.equals(PotionsType.Attack.toString()))){
+                            Potion.interact(InteractionCenter.Drink.toString());
+                            break;
+                        }
                     }
-                }
-                if(Skills.getRealLevel(Skill.STRENGTH) >= Skills.getBoostedLevels(Skill.STRENGTH)){
-                    if(Potion.getName().contains(PotionsModel[i].Name) && (PotionsModel[i].Type.equals(PotionsType.Strength.toString()))){
-                        Potion.interact(InteractionCenter.Drink.toString());
-                        break;
+                    if(Skills.getRealLevel(Skill.STRENGTH) >= Skills.getBoostedLevels(Skill.STRENGTH)){
+                        if(Potion.getName().contains(PotionsModel[i].Name) && (PotionsModel[i].Type.equals(PotionsType.Strength.toString()))){
+                            Potion.interact(InteractionCenter.Drink.toString());
+                            break;
+                        }
                     }
-                }
-                if(Skills.getRealLevel(Skill.RANGED) >= Skills.getBoostedLevels(Skill.RANGED)){
-                    if(Potion.getName().contains(PotionsModel[i].Name) && (PotionsModel[i].Type.equals(PotionsType.Ranging.toString()))){
-                        Potion.interact(InteractionCenter.Drink.toString());
-                        break;
-                    }
+                    if(Skills.getRealLevel(Skill.RANGED) >= Skills.getBoostedLevels(Skill.RANGED)){
+                        if(Potion.getName().contains(PotionsModel[i].Name) && (PotionsModel[i].Type.equals(PotionsType.Ranging.toString()))){
+                            Potion.interact(InteractionCenter.Drink.toString());
+                            break;
+                        }
 
-                }
-                if(Skills.getRealLevel(Skill.MAGIC) >= Skills.getBoostedLevels(Skill.MAGIC)){
-                    if(Potion.getName().contains(PotionsModel[i].Name) && (PotionsModel[i].Type.equals(PotionsType.Magic.toString()))){
-                        Potion.interact(InteractionCenter.Drink.toString());
-                        break;
                     }
-                }
-                if(Walking.getRunEnergy() < 10){
-                    if(Potion.getName().contains(PotionsModel[i].Name) && (PotionsModel[i].Type.equals(PotionsType.Energy.toString()))){
-                        Potion.interact(InteractionCenter.Drink.toString());
-                        break;
+                    if(Skills.getRealLevel(Skill.MAGIC) >= Skills.getBoostedLevels(Skill.MAGIC)){
+                        if(Potion.getName().contains(PotionsModel[i].Name) && (PotionsModel[i].Type.equals(PotionsType.Magic.toString()))){
+                            Potion.interact(InteractionCenter.Drink.toString());
+                            break;
+                        }
+                    }
+                    if(Walking.getRunEnergy() < 10){
+                        if(Potion.getName().contains(PotionsModel[i].Name) && (PotionsModel[i].Type.equals(PotionsType.Energy.toString()))){
+                            Potion.interact(InteractionCenter.Drink.toString());
+                            break;
+                        }
                     }
                 }
             }
-        }
+        }catch (Exception e){};
     }
 }

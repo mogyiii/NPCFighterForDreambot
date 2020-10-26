@@ -2,7 +2,6 @@ package Combat;
 
 import Factory.Factory;
 import Factory.Methods.PlayerEquipment;
-import GUI.Window;
 import org.dreambot.api.methods.Calculations;
 import org.dreambot.api.methods.container.impl.equipment.Equipment;
 import org.dreambot.api.methods.container.impl.equipment.EquipmentSlot;
@@ -16,7 +15,7 @@ import org.dreambot.api.wrappers.widgets.message.Message;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-@ScriptManifest(category = Category.COMBAT, name = "Mogy NPC Fighter", author = "Mogyiii", version = 1.0)
+@ScriptManifest(category = Category.COMBAT, name = "Mogy NPC Fighter", author = "Mogyiii", version = 1.1)
 public class Main extends AbstractScript {
 	private CombatVariables _CombatVariables;
 	private Factory _factory;
@@ -24,8 +23,7 @@ public class Main extends AbstractScript {
 	private SetStart setStart;
 	@Override
 	public void onStart() {
-		super.onStart();
-        this._CombatVariables = new CombatVariables(new Window(this));
+		this._CombatVariables = new CombatVariables(this);
         this._factory = new Factory(this);
 		this.setStart = new SetStart(this._factory);
 	}

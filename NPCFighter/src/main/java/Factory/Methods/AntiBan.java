@@ -3,6 +3,7 @@ package Factory.Methods;
 import Factory.Factory;
 import org.dreambot.api.Client;
 import org.dreambot.api.input.Mouse;
+import org.dreambot.api.methods.dialogues.Dialogues;
 import org.dreambot.api.methods.input.Camera;
 import org.dreambot.api.methods.skills.Skill;
 import org.dreambot.api.methods.skills.Skills;
@@ -50,7 +51,7 @@ public class AntiBan {
             _factory.getMain().sleep(200, 500);
         }
         if(chances > 355 && chances <360){
-            if(!_factory.getMain().get_CombatVariables().get_WindowVariables().isUseWorldHopper()) {
+            if(_factory.getMain().get_CombatVariables().get_WindowVariables().isUseWorldHopper()) {
                 _factory.getInteractionUser().SetActivity("Anti-ban: Hop world");
 
                 if (!Client.isMembers()) {
@@ -64,7 +65,9 @@ public class AntiBan {
                 }
             }
         }
-
+        if(Dialogues.canContinue()){
+            Dialogues.clickContinue();
+        }
     }
     private Skill ChoseRandomSkill(){
         Skill[] Skills = new Skill[]{Skill.STRENGTH, Skill.ATTACK, Skill.PRAYER, Skill.MAGIC, Skill.DEFENCE, Skill.RANGED, Skill.HITPOINTS};

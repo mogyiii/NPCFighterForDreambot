@@ -1,20 +1,20 @@
 package Combat;
 
 import Factory.WindowVariables;
-import GUI.Window;
+import GUI.WindowSetting;
 
 public class CombatVariables {
-    private Window _window;
+    private WindowSetting _windowSetting;
     private WindowVariables _WindowVariables;
     private boolean isStarted;
-    public CombatVariables(Window _window) {
-        this._window = _window;
+    public CombatVariables(Main main) {
+        this._windowSetting = new WindowSetting(main);
         this._WindowVariables = new WindowVariables();
         this.isStarted = false;
     }
 
-    public Window get_window() {
-        return _window;
+    public WindowSetting get_window() {
+        return _windowSetting;
     }
 
     public WindowVariables get_WindowVariables() {

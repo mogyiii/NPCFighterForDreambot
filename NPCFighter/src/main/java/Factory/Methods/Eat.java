@@ -8,6 +8,8 @@ import org.dreambot.api.methods.skills.Skill;
 import org.dreambot.api.methods.skills.Skills;
 import org.dreambot.api.wrappers.items.Item;
 
+import java.io.IOException;
+
 public class Eat {
     private Factory _factory;
     static FoodsModel[] FoodModel = null;
@@ -50,13 +52,16 @@ public class Eat {
                 NotRecognizableFood();
             }
         }catch (Exception e){
-            _factory.getMain().log("Food error: " + e.toString());
+            //_factory.getMain().log("Food error: " + e.toString());
+            _factory.getMain().log("Food error! Please report Dreambot forum in 'Mogy NPC fighter'!");
+            e.printStackTrace();
             NotRecognizableFood();
         }
     }
-    public String getEdibleFoodFromInvertory(){
+    public String getEdibleFoodFromInvertory() throws IOException {
         if(FoodModel == null){
-            FoodModel =  _factory.getJSON().GetNewGson().fromJson(_factory.getJSON().getJson("Foods.json"), FoodsModel[].class);
+            //FoodModel =  _factory.getJSON().GetNewGson().fromJson(_factory.getJSON().getJson("Foods.json"), FoodsModel[].class);
+            FoodModel =  _factory.getJSON().GetNewGson().fromJson(_factory.getDownload().DownloadString("https://raw.githubusercontent.com/mogyiii/NPCFighterForDreambot/master/NPCFighter/resources/Foods.json"), FoodsModel[].class);
         }
         for (int i = 0; i < FoodModel.length; i++) {
             //_factory.getMain().log("Scanned item = Name: " + FoodModel[i].Food +" Heals percent: " + FoodModel[i].Heals + " check: " + ((getMissingHitpoints() >= FoodModel[i].Heals) && Inventory.contains(FoodModel[i].Food)));

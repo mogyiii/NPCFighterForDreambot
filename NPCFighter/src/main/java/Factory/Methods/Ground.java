@@ -48,9 +48,8 @@ public class Ground {
         TakeItemsFromGround();
     }
     private void TakeList(){
-        for(int i = 0; i < GroundItems.all().size(); i++){
-            //Take List
-            for(int j = 0; j < _factory.getMain().get_CombatVariables().get_WindowVariables().getPickUpItems().length; j++){
+        for(int j = 0; j < _factory.getMain().get_CombatVariables().get_WindowVariables().getPickUpItems().length; j++){
+            for(int i = 0; i < GroundItems.all().size(); i++){
                 GroundItem scannedItem = GroundItems.all().get(i);
                 if(scannedItem.toString().toUpperCase().equals(_factory.getMain().get_CombatVariables().get_WindowVariables().getPickUpItems()[j].toUpperCase())){
                     if (_factory.getBotArea().getWalkToArea().contains(scannedItem.getTile())) {
@@ -190,24 +189,24 @@ public class Ground {
     }
     private void TakeItemsFromGround() {
         for(int indexGroundItems = 0; indexGroundItems < GroundItemsArray.size(); indexGroundItems++){
-            GroundItem groundItem = GroundItemsArray.get(indexGroundItems);
-            if (groundItem.exists()) {
-                ClosesItem closesItems = new ClosesItem();
-                closesItems.setCost(99);
-                closesItems.setIndex(-1);
-                for (int i = 0; i < GroundItemsArray.size(); i++) {
-                    GroundItem scannedItem = GroundItemsArray.get(i);
-                    if (closesItems.getCost() > Walking.getAStarPathFinder().calculate(_factory.getMain().getLocalPlayer().getTile(), scannedItem.getTile()).size() && _factory.getBotArea().getWalkToArea().contains(scannedItem.getTile())) {
-                        closesItems.setCost(Walking.getAStarPathFinder().calculate(_factory.getMain().getLocalPlayer().getTile(), scannedItem.getTile()).size());
-                        closesItems.setIndex(i);
-                        closesItems.setSelectedItem(scannedItem);
-                    }
+            ClosesItem closesItems = new ClosesItem();
+            closesItems.setCost(99);
+            closesItems.setIndex(-1);
+            for (int i = 0; i < GroundItemsArray.size(); i++) {
+                GroundItem scannedItem = GroundItemsArray.get(i);
+                if (closesItems.getCost() > Walking.getAStarPathFinder().calculate(_factory.getMain().getLocalPlayer().getTile(), scannedItem.getTile()).size() && _factory.getBotArea().getWalkToArea().contains(scannedItem.getTile())) {
+                    closesItems.setCost(Walking.getAStarPathFinder().calculate(_factory.getMain().getLocalPlayer().getTile(), scannedItem.getTile()).size());
+                    closesItems.setIndex(i);
+                    closesItems.setSelectedItem(scannedItem);
                 }
+            }
+            if (closesItems.getSelectedItem().exists()) {
                 if (closesItems.getIndex() != -1) {
                     if(Inventory.isFull() && !CheckInvertory().equals("")){
                         BuryBones();
                     }else{
                         closesItems.getSelectedItem().interact(InteractionCenter.Take.toString());
+                        _factory.getMain().sleep(200, 500);
                     }
                     _factory.getTime().setActionTime(0);
                     do {
@@ -219,8 +218,10 @@ public class Ground {
                     _factory.getTime().setActionTime(0);
                     _factory.getMain().sleep(1000, 2000);
                 }
+                if(!closesItems.getSelectedItem().exists()){
+                    GroundItemsArray.remove(indexGroundItems);
+                }
             }
         }
-
     }
 }

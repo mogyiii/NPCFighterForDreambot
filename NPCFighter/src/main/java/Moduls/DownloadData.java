@@ -17,9 +17,13 @@ public class DownloadData {
         URL url = new URL(downloadurl);
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
 
-        String s = null;
-        while ((s = reader.readLine()) != null){}
-        return s;
+        String Line = null;
+        StringBuilder returnString = new StringBuilder();
+        while ((Line = reader.readLine()) != null){
+            returnString.append(Line);
+        }
+        //System.out.println(returnString.toString());
+        return returnString.toString();
     }
 
 }

@@ -4,6 +4,7 @@ import Factory.Enums.InteractionCenter;
 import Factory.Factory;
 import org.dreambot.api.methods.combat.Combat;
 import org.dreambot.api.methods.interactive.NPCs;
+import org.dreambot.api.methods.magic.Magic;
 import org.dreambot.api.methods.walking.impl.Walking;
 import org.dreambot.api.wrappers.interactive.NPC;
 
@@ -44,7 +45,11 @@ public class Fight {
             }
             try{
                 if(SelectedEnemy != null && SelectedEnemy.getHealthPercent() >= 10){
-                    SelectedEnemy.interact(InteractionCenter.Attack.toString());
+                    if(Magic.isSpellSelected()){
+                        SelectedEnemy.interact(InteractionCenter.Cast.toString());
+                    }else{
+                        SelectedEnemy.interact(InteractionCenter.Attack.toString());
+                    }
                 }else{
                     SelectedEnemy = null;
                 }
